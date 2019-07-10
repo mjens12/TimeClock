@@ -517,60 +517,15 @@ public class TimeClockGUI extends JFrame {
 		lblDailyHrs.setBounds(698, 183, 189, 42);
 		contentPane.add(lblDailyHrs);
 		
-		JTextPane sunTotHrs = new JTextPane();
-		sunTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
-		sunTotHrs.setBounds(738, 267, 99, 27);
-		contentPane.add(sunTotHrs);
-		
-		JTextPane monTotHrs = new JTextPane();
-		monTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
-		monTotHrs.setBounds(738, 317, 99, 27);
-		contentPane.add(monTotHrs);
-		
-		JTextPane tuesTotHrs = new JTextPane();
-		tuesTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
-		tuesTotHrs.setBounds(738, 372, 99, 27);
-		contentPane.add(tuesTotHrs);
-		
-		JTextPane wedTotHrs = new JTextPane();
-		wedTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
-		wedTotHrs.setBounds(738, 417, 99, 27);
-		contentPane.add(wedTotHrs);
-		
-		JTextPane thursTotHrs = new JTextPane();
-		thursTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
-		thursTotHrs.setBounds(738, 462, 99, 27);
-		contentPane.add(thursTotHrs);
-		
-		JTextPane friTotHrs = new JTextPane();
-		friTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
-		friTotHrs.setBounds(738, 512, 99, 27);
-		contentPane.add(friTotHrs);
-		
-		JTextPane satTotHrs = new JTextPane();
-		satTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
-		satTotHrs.setBounds(738, 560, 99, 27);
-		contentPane.add(satTotHrs);
-		
 		JLabel lblTotalHrs = new JLabel("WEEKLY TOTAL");
 		lblTotalHrs.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblTotalHrs.setBounds(698, 617, 211, 42);
 		contentPane.add(lblTotalHrs);
 		
-		JTextPane weekTotHrs = new JTextPane();
-		weekTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
-		weekTotHrs.setBounds(738, 663, 99, 27);
-		contentPane.add(weekTotHrs);
-		
 		JLabel lblGrossDollars = new JLabel("GROSS INCOME");
 		lblGrossDollars.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblGrossDollars.setBounds(698, 703, 256, 42);
 		contentPane.add(lblGrossDollars);
-		
-		JTextPane weekGrossDollars = new JTextPane();
-		weekGrossDollars.setFont(new Font("Tahoma", Font.BOLD, 20));
-		weekGrossDollars.setBounds(738, 749, 99, 27);
-		contentPane.add(weekGrossDollars);
 		
 		JLabel lblPayRate = new JLabel("Pay Rate");
 		lblPayRate.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -610,12 +565,64 @@ public class TimeClockGUI extends JFrame {
 		lblNetPay.setBounds(738, 789, 113, 42);
 		contentPane.add(lblNetPay);
 		
-		JTextPane weekNetPay = new JTextPane();
-		weekNetPay.setToolTipText("");
+		JLabel sunTotHrs = new JLabel("");
+		sunTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
+		sunTotHrs.setBackground(new Color(255, 255, 255));
+		sunTotHrs.setBounds(738, 267, 99, 27);
+		contentPane.add(sunTotHrs);
+		
+		JLabel monTotHrs = new JLabel("");
+		monTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
+		monTotHrs.setBackground(Color.WHITE);
+		monTotHrs.setBounds(738, 312, 99, 27);
+		contentPane.add(monTotHrs);
+		
+		JLabel tuesTotHrs = new JLabel("");
+		tuesTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
+		tuesTotHrs.setBackground(Color.WHITE);
+		tuesTotHrs.setBounds(738, 362, 99, 27);
+		contentPane.add(tuesTotHrs);
+		
+		JLabel wedTotHrs = new JLabel("");
+		wedTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
+		wedTotHrs.setBackground(Color.WHITE);
+		wedTotHrs.setBounds(738, 412, 99, 27);
+		contentPane.add(wedTotHrs);
+		
+		JLabel thusTotHrs = new JLabel("");
+		thusTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
+		thusTotHrs.setBackground(Color.WHITE);
+		thusTotHrs.setBounds(738, 467, 99, 27);
+		contentPane.add(thusTotHrs);
+		
+		JLabel friTotHrs = new JLabel("");
+		friTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
+		friTotHrs.setBackground(Color.WHITE);
+		friTotHrs.setBounds(738, 517, 99, 27);
+		contentPane.add(friTotHrs);
+		
+		JLabel satTotHrs = new JLabel("");
+		satTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
+		satTotHrs.setBackground(Color.WHITE);
+		satTotHrs.setBounds(738, 561, 99, 27);
+		contentPane.add(satTotHrs);
+		
+		JLabel weekTotHrs = new JLabel("");
+		weekTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
+		weekTotHrs.setBackground(Color.WHITE);
+		weekTotHrs.setBounds(738, 663, 99, 27);
+		contentPane.add(weekTotHrs);
+		
+		JLabel weekGrossDollars = new JLabel("");
+		weekGrossDollars.setFont(new Font("Tahoma", Font.BOLD, 20));
+		weekGrossDollars.setBackground(Color.WHITE);
+		weekGrossDollars.setBounds(738, 749, 99, 27);
+		contentPane.add(weekGrossDollars);
+		
+		JLabel weekNetPay = new JLabel("");
 		weekNetPay.setFont(new Font("Tahoma", Font.BOLD, 20));
-		weekNetPay.setBounds(738, 834, 99, 27);
+		weekNetPay.setBackground(Color.WHITE);
+		weekNetPay.setBounds(738, 825, 99, 27);
 		contentPane.add(weekNetPay);
 	}
-	
-	//ADD ACTION LISTENER STUFF DOWN HERE
 }
