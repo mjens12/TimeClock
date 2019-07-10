@@ -65,31 +65,55 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 	private JTextField satOutMin;
 	private JTextField payRateDollars;
 
-	JComboBox sunInAMPMBox = new JComboBox();
-	JComboBox monInAMPMBox = new JComboBox();
-	JComboBox tuesInAMPMBox = new JComboBox();
-	JComboBox wedInAMPMBox = new JComboBox();
-	JComboBox thursInAMPMBox = new JComboBox();
-	JComboBox friInAMPMBox = new JComboBox();
-	JComboBox satInAMPMBox = new JComboBox();
+	private JLabel lblClockout = new JLabel("OUT");
+	private JLabel lblDailyHrs = new JLabel("TIME WORKED");
+	private JLabel lblTotalHrs = new JLabel("WEEKLY TOTAL");
+	private JLabel lblGrossDollars = new JLabel("GROSS INCOME");
+	private JLabel lblPayRate = new JLabel("Pay Rate");
+	private JLabel lblPerHr = new JLabel("Per Hour");
+	private JLabel sColonLbl_8 = new JLabel(":");
+	private JLabel sColonLbl_9 = new JLabel(":");
+	private JLabel sColonLbl_10 = new JLabel(":");
+	private JLabel sColonLbl_11 = new JLabel(":");
+	private JLabel sColonLbl_12 = new JLabel(":");
+	private JLabel sColonLbl_13 = new JLabel(":");
+	private JLabel sColonLbl_14 = new JLabel(":");
+	private JLabel lblMinOut = new JLabel("Min");
 
-	JComboBox sunOutAMPMBox = new JComboBox();
-	JComboBox monOutAMPMBox = new JComboBox();
-	JComboBox tuesOutAMPMBox = new JComboBox();
-	JComboBox wedOutAMPMBox = new JComboBox();
-	JComboBox thursOutAMPMBox = new JComboBox();
-	JComboBox friOutAMPMBox = new JComboBox();
-	JComboBox satOutAMPMBox = new JComboBox();
+	private JTextArea taxNotice = new JTextArea();
 
-	JLabel sunTotHrs = new JLabel("");
-	JLabel monTotHrs = new JLabel("");
-	JLabel tuesTotHrs = new JLabel("");
-	JLabel wedTotHrs = new JLabel("");
-	JLabel thusTotHrs = new JLabel("");
-	JLabel friTotHrs = new JLabel("");
-	JLabel satTotHrs = new JLabel("");
+	private JLabel lblWeeklyHrs = new JLabel("Hours");
+	private JLabel lblNetPay = new JLabel("NET PAY");
 
-	JButton enterButton = new JButton("Enter");
+	private JLabel weekTotHrs = new JLabel("");
+	private JLabel weekGrossDollars = new JLabel("");
+	private JLabel weekNetPay = new JLabel("");
+
+	private JComboBox sunInAMPMBox = new JComboBox();
+	private JComboBox monInAMPMBox = new JComboBox();
+	private JComboBox tuesInAMPMBox = new JComboBox();
+	private JComboBox wedInAMPMBox = new JComboBox();
+	private JComboBox thursInAMPMBox = new JComboBox();
+	private JComboBox friInAMPMBox = new JComboBox();
+	private JComboBox satInAMPMBox = new JComboBox();
+
+	private JComboBox sunOutAMPMBox = new JComboBox();
+	private JComboBox monOutAMPMBox = new JComboBox();
+	private JComboBox tuesOutAMPMBox = new JComboBox();
+	private JComboBox wedOutAMPMBox = new JComboBox();
+	private JComboBox thursOutAMPMBox = new JComboBox();
+	private JComboBox friOutAMPMBox = new JComboBox();
+	private JComboBox satOutAMPMBox = new JComboBox();
+
+	private JLabel sunTotHrs = new JLabel("");
+	private JLabel monTotHrs = new JLabel("");
+	private JLabel tuesTotHrs = new JLabel("");
+	private JLabel wedTotHrs = new JLabel("");
+	private JLabel thusTotHrs = new JLabel("");
+	private JLabel friTotHrs = new JLabel("");
+	private JLabel satTotHrs = new JLabel("");
+
+	private JButton enterButton = new JButton("Enter");
 
 	private Clock week = new Clock();
 
@@ -417,42 +441,34 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		satOutHr.setBounds(382, 562, 38, 27);
 		contentPane.add(satOutHr);
 
-		JLabel sColonLbl_8 = new JLabel(":");
 		sColonLbl_8.setFont(new Font("Tahoma", Font.BOLD, 20));
 		sColonLbl_8.setBounds(426, 267, 16, 19);
 		contentPane.add(sColonLbl_8);
 
-		JLabel sColonLbl_9 = new JLabel(":");
 		sColonLbl_9.setFont(new Font("Tahoma", Font.BOLD, 20));
 		sColonLbl_9.setBounds(426, 312, 16, 29);
 		contentPane.add(sColonLbl_9);
 
-		JLabel sColonLbl_10 = new JLabel(":");
 		sColonLbl_10.setFont(new Font("Tahoma", Font.BOLD, 20));
 		sColonLbl_10.setBounds(426, 362, 16, 29);
 		contentPane.add(sColonLbl_10);
 
-		JLabel sColonLbl_11 = new JLabel(":");
 		sColonLbl_11.setFont(new Font("Tahoma", Font.BOLD, 20));
 		sColonLbl_11.setBounds(426, 412, 16, 29);
 		contentPane.add(sColonLbl_11);
 
-		JLabel sColonLbl_12 = new JLabel(":");
 		sColonLbl_12.setFont(new Font("Tahoma", Font.BOLD, 20));
 		sColonLbl_12.setBounds(426, 462, 16, 29);
 		contentPane.add(sColonLbl_12);
 
-		JLabel sColonLbl_13 = new JLabel(":");
 		sColonLbl_13.setFont(new Font("Tahoma", Font.BOLD, 20));
 		sColonLbl_13.setBounds(426, 512, 16, 29);
 		contentPane.add(sColonLbl_13);
 
-		JLabel sColonLbl_14 = new JLabel(":");
 		sColonLbl_14.setFont(new Font("Tahoma", Font.BOLD, 20));
 		sColonLbl_14.setBounds(426, 562, 16, 23);
 		contentPane.add(sColonLbl_14);
 
-		JLabel lblMinOut = new JLabel("Min");
 		lblMinOut.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblMinOut.setBounds(439, 238, 44, 16);
 		contentPane.add(lblMinOut);
@@ -548,27 +564,22 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		satOutAMPMBox.setBounds(486, 560, 53, 27);
 		contentPane.add(satOutAMPMBox);
 
-		JLabel lblClockout = new JLabel("OUT");
 		lblClockout.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblClockout.setBounds(419, 183, 55, 42);
 		contentPane.add(lblClockout);
 
-		JLabel lblDailyHrs = new JLabel("TIME WORKED");
 		lblDailyHrs.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblDailyHrs.setBounds(698, 183, 189, 42);
 		contentPane.add(lblDailyHrs);
 
-		JLabel lblTotalHrs = new JLabel("WEEKLY TOTAL");
 		lblTotalHrs.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblTotalHrs.setBounds(698, 617, 211, 42);
 		contentPane.add(lblTotalHrs);
 
-		JLabel lblGrossDollars = new JLabel("GROSS INCOME");
 		lblGrossDollars.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblGrossDollars.setBounds(698, 703, 256, 42);
 		contentPane.add(lblGrossDollars);
 
-		JLabel lblPayRate = new JLabel("Pay Rate");
 		lblPayRate.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblPayRate.setBounds(48, 623, 98, 25);
 		contentPane.add(lblPayRate);
@@ -580,12 +591,10 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		payRateDollars.setBounds(184, 621, 91, 27);
 		contentPane.add(payRateDollars);
 
-		JLabel lblPerHr = new JLabel("Per Hour");
 		lblPerHr.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblPerHr.setBounds(282, 625, 69, 25);
 		contentPane.add(lblPerHr);
 
-		JTextArea taxNotice = new JTextArea();
 		taxNotice.setBackground(new Color(135, 206, 250));
 		taxNotice.setText("Value calculated in the Net Pay\r\nField is"
 				+ " affected by these typical U.S taxes:"
@@ -596,12 +605,10 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		taxNotice.setBounds(693, 865, 261, 88);
 		contentPane.add(taxNotice);
 
-		JLabel lblWeeklyHrs = new JLabel("Hours");
 		lblWeeklyHrs.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblWeeklyHrs.setBounds(840, 672, 69, 25);
 		contentPane.add(lblWeeklyHrs);
 
-		JLabel lblNetPay = new JLabel("NET PAY");
 		lblNetPay.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblNetPay.setBounds(738, 789, 113, 42);
 		contentPane.add(lblNetPay);
@@ -648,19 +655,17 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		satTotHrs.setBounds(738, 561, 99, 27);
 		contentPane.add(satTotHrs);
 
-		JLabel weekTotHrs = new JLabel("");
 		weekTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
 		weekTotHrs.setBackground(Color.WHITE);
+		weekTotHrs.setOpaque(true);
 		weekTotHrs.setBounds(738, 663, 99, 27);
 		contentPane.add(weekTotHrs);
 
-		JLabel weekGrossDollars = new JLabel("");
 		weekGrossDollars.setFont(new Font("Tahoma", Font.BOLD, 20));
 		weekGrossDollars.setBackground(Color.WHITE);
 		weekGrossDollars.setBounds(738, 749, 99, 27);
 		contentPane.add(weekGrossDollars);
 
-		JLabel weekNetPay = new JLabel("");
 		weekNetPay.setFont(new Font("Tahoma", Font.BOLD, 20));
 		weekNetPay.setBackground(Color.WHITE);
 		weekNetPay.setBounds(738, 825, 99, 27);
@@ -918,6 +923,8 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		thusTotHrs.setText(df.format(thurs));
 		friTotHrs.setText(df.format(fri));
 		satTotHrs.setText(df.format(sat));
+		weekTotHrs.setText(
+				df.format(sun + mon + tues + wed + thurs + fri + sat));
 	}
 
 	public void actionPerformed(ActionEvent e) {
