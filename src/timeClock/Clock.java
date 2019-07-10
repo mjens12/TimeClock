@@ -62,6 +62,14 @@ public class Clock {
 	 * @return Time value in milliseconds
 	 */
 
+	public void zeroDataArray() {
+		for (int x = 0; x < 7; x++) {
+			for (int y = 0; y < 6; y++) {
+				weekData[x][y] = 0;
+			}
+		}
+	}
+
 	public double calcTime(int time1H, int time1M, int time1AMPM,
 			int time2H, int time2M, int time2AMPM) {
 		double toReturn = 0;

@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -30,6 +31,8 @@ import javax.swing.border.EmptyBorder;
  *
  */
 public class TimeClockGUI extends JFrame implements ActionListener {
+
+	private static DecimalFormat df = new DecimalFormat("0.00");
 
 	private JPanel contentPane;
 	private JTextField wedInHr;
@@ -77,6 +80,14 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 	JComboBox thursOutAMPMBox = new JComboBox();
 	JComboBox friOutAMPMBox = new JComboBox();
 	JComboBox satOutAMPMBox = new JComboBox();
+
+	JLabel sunTotHrs = new JLabel("");
+	JLabel monTotHrs = new JLabel("");
+	JLabel tuesTotHrs = new JLabel("");
+	JLabel wedTotHrs = new JLabel("");
+	JLabel thusTotHrs = new JLabel("");
+	JLabel friTotHrs = new JLabel("");
+	JLabel satTotHrs = new JLabel("");
 
 	JButton enterButton = new JButton("Enter");
 
@@ -595,49 +606,42 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		lblNetPay.setBounds(738, 789, 113, 42);
 		contentPane.add(lblNetPay);
 
-		JLabel sunTotHrs = new JLabel("");
 		sunTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
 		sunTotHrs.setBackground(new Color(255, 255, 255));
 		sunTotHrs.setOpaque(true);
 		sunTotHrs.setBounds(738, 267, 99, 27);
 		contentPane.add(sunTotHrs);
 
-		JLabel monTotHrs = new JLabel("");
 		monTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
 		monTotHrs.setBackground(Color.WHITE);
 		monTotHrs.setOpaque(true);
 		monTotHrs.setBounds(738, 312, 99, 27);
 		contentPane.add(monTotHrs);
 
-		JLabel tuesTotHrs = new JLabel("");
 		tuesTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
 		tuesTotHrs.setBackground(Color.WHITE);
 		tuesTotHrs.setOpaque(true);
 		tuesTotHrs.setBounds(738, 362, 99, 27);
 		contentPane.add(tuesTotHrs);
 
-		JLabel wedTotHrs = new JLabel("");
 		wedTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
 		wedTotHrs.setBackground(Color.WHITE);
 		wedTotHrs.setOpaque(true);
 		wedTotHrs.setBounds(738, 412, 99, 27);
 		contentPane.add(wedTotHrs);
 
-		JLabel thusTotHrs = new JLabel("");
 		thusTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
 		thusTotHrs.setBackground(Color.WHITE);
 		thusTotHrs.setOpaque(true);
 		thusTotHrs.setBounds(738, 467, 99, 27);
 		contentPane.add(thusTotHrs);
 
-		JLabel friTotHrs = new JLabel("");
 		friTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
 		friTotHrs.setBackground(Color.WHITE);
 		friTotHrs.setOpaque(true);
 		friTotHrs.setBounds(738, 517, 99, 27);
 		contentPane.add(friTotHrs);
 
-		JLabel satTotHrs = new JLabel("");
 		satTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
 		satTotHrs.setBackground(Color.WHITE);
 		satTotHrs.setOpaque(true);
@@ -856,16 +860,75 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 
 	}
 
+	private void updateCalcHrs() {
+		// Need to handle numbers larger than 12 and less than 0 still,
+		// maybe better to handle in clock.calcTime
+		int x = 0;
+		double sun = 0;
+		double mon = 0;
+		double tues = 0;
+		double wed = 0;
+		double thurs = 0;
+		double fri = 0;
+		double sat = 0;
+
+		for (int y = 0; y < 6; y++) {
+			int a = week.weekData[y][0];
+			int b = week.weekData[y][1];
+			int c = week.weekData[y][2];
+			int d = week.weekData[y][3];
+			int e = week.weekData[y][4];
+			int f = week.weekData[y][5];
+
+			switch (x) {
+			case 0:
+				sun = week.calcTime(a, b, c, d, e, f);
+				x++;
+				break;
+			case 1:
+				mon = week.calcTime(a, b, c, d, e, f);
+				x++;
+				break;
+			case 2:
+				tues = week.calcTime(a, b, c, d, e, f);
+				x++;
+				break;
+			case 3:
+				wed = week.calcTime(a, b, c, d, e, f);
+				x++;
+				break;
+			case 4:
+				thurs = week.calcTime(a, b, c, d, e, f);
+				x++;
+				break;
+			case 5:
+				fri = week.calcTime(a, b, c, d, e, f);
+				x++;
+				break;
+			case 6:
+				sat = week.calcTime(a, b, c, d, e, f);
+				break;
+			}
+
+		}
+		sunTotHrs.setText(df.format(sun));
+		monTotHrs.setText(df.format(mon));
+		tuesTotHrs.setText(df.format(tues));
+		wedTotHrs.setText(df.format(wed));
+		thusTotHrs.setText(df.format(thurs));
+		friTotHrs.setText(df.format(fri));
+		satTotHrs.setText(df.format(sat));
+	}
+
 	public void actionPerformed(ActionEvent e) {
 
 		Object action = e.getSource();
 
 		if (enterButton == action) {
 			setWeekDataArray();
-			for (int x = 0; x < 6; x++) {
-				// For testing array contents
-				// System.out.println(week.weekData[0][x]);
-			}
+			// to test array contents
+			// System.out.println(Arrays.deepToString(week.weekData));
+			updateCalcHrs();
 		}
 	}
 }
