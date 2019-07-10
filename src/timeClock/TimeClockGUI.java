@@ -1,32 +1,35 @@
 package timeClock;
 
+import java.awt.Color;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Toolkit;
-import java.awt.Color;
-import javax.swing.JTextPane;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 /**
- * This is the front end of the Time Clock software. All JComponents and Action
- * Listeners are within this class. Action listeners call various classes such
- * as Clock.java and potential dialouge classes.
+ * This is the front end of the Time Clock software. All JComponents
+ * and Action Listeners are within this class. Action listeners call
+ * various classes such as Clock.java and potential dialouge classes.
  * 
- * Entire GUI (Except for action listeners) was created and generated using the
- * Eclipse Window Builder PlugIn.
+ * Entire GUI (Except for action listeners) was created and generated
+ * using the Eclipse Window Builder PlugIn.
  * 
  * @author Tyler Hay, Freeman Ogburn, Max Jensen
  *
  */
-public class TimeClockGUI extends JFrame {
+public class TimeClockGUI extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JTextField wedInHr;
@@ -75,9 +78,9 @@ public class TimeClockGUI extends JFrame {
 	JComboBox friOutAMPMBox = new JComboBox();
 	JComboBox satOutAMPMBox = new JComboBox();
 
-	private Clock week = new Clock();
+	JButton enterButton = new JButton("Enter");
 
-	int[][] dataArray = new int[7][7];
+	private Clock week = new Clock();
 
 	/**
 	 * Launch the application.
@@ -100,8 +103,10 @@ public class TimeClockGUI extends JFrame {
 	 */
 	public TimeClockGUI() {
 		setBackground(new Color(255, 255, 255));
-		setIconImage(Toolkit.getDefaultToolkit().getImage(TimeClockGUI.class
-				.getResource("/com/sun/javafx/scene/control/skin" + "/caspian/dialog-more-details@2x.png")));
+		setIconImage(Toolkit.getDefaultToolkit()
+				.getImage(TimeClockGUI.class.getResource(
+						"/com/sun/javafx/scene/control/skin"
+								+ "/caspian/dialog-more-details@2x.png")));
 		setTitle("CS350 Punch Clock");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 1000);
@@ -111,8 +116,10 @@ public class TimeClockGUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblPunchClock = new JLabel("Punch Clock & Wage Calculator");
-		lblPunchClock.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 30));
+		JLabel lblPunchClock =
+				new JLabel("Punch Clock & Wage Calculator");
+		lblPunchClock.setFont(
+				new Font("Arial Rounded MT Bold", Font.BOLD, 30));
 		lblPunchClock.setBounds(237, 45, 531, 48);
 		contentPane.add(lblPunchClock);
 
@@ -300,39 +307,50 @@ public class TimeClockGUI extends JFrame {
 		contentPane.add(lblClockin);
 
 		sunInAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
-		sunInAMPMBox.setModel(new DefaultComboBoxModel(new String[] { "AM", "PM" }));
+		sunInAMPMBox.setModel(
+				new DefaultComboBoxModel(new String[] { "AM", "PM" }));
 		sunInAMPMBox.setBounds(287, 267, 53, 27);
 		contentPane.add(sunInAMPMBox);
 
-		monInAMPMBox.setModel(new DefaultComboBoxModel(new String[] { "AM", "PM" }));
+		monInAMPMBox.setModel(
+				new DefaultComboBoxModel(new String[] { "AM", "PM" }));
 		monInAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		monInAMPMBox.setBounds(287, 317, 53, 27);
 		contentPane.add(monInAMPMBox);
 
-		tuesInAMPMBox.setModel(new DefaultComboBoxModel(new String[] { "AM", "PM" }));
+		tuesInAMPMBox.setModel(
+				new DefaultComboBoxModel(new String[] { "AM", "PM" }));
 		tuesInAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		tuesInAMPMBox.setBounds(287, 367, 53, 27);
 		contentPane.add(tuesInAMPMBox);
 
-		wedInAMPMBox.setModel(new DefaultComboBoxModel(new String[] { "AM", "PM" }));
+		wedInAMPMBox.setModel(
+				new DefaultComboBoxModel(new String[] { "AM", "PM" }));
 		wedInAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		wedInAMPMBox.setBounds(287, 417, 53, 27);
 		contentPane.add(wedInAMPMBox);
 
-		thursInAMPMBox.setModel(new DefaultComboBoxModel(new String[] { "AM", "PM" }));
+		thursInAMPMBox.setModel(
+				new DefaultComboBoxModel(new String[] { "AM", "PM" }));
 		thursInAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		thursInAMPMBox.setBounds(287, 467, 53, 27);
 		contentPane.add(thursInAMPMBox);
 
-		friInAMPMBox.setModel(new DefaultComboBoxModel(new String[] { "AM", "PM" }));
+		friInAMPMBox.setModel(
+				new DefaultComboBoxModel(new String[] { "AM", "PM" }));
 		friInAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		friInAMPMBox.setBounds(287, 519, 53, 27);
 		contentPane.add(friInAMPMBox);
 
-		satInAMPMBox.setModel(new DefaultComboBoxModel(new String[] { "AM", "PM" }));
+		satInAMPMBox.setModel(
+				new DefaultComboBoxModel(new String[] { "AM", "PM" }));
 		satInAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		satInAMPMBox.setBounds(287, 563, 53, 27);
 		contentPane.add(satInAMPMBox);
+
+		enterButton.setFont(new Font("Tahoma", Font.BOLD, 15));
+		enterButton.setBounds(382, 600, 100, 50);
+		contentPane.add(enterButton);
 
 		JLabel lblHrOut = new JLabel("Hr");
 		lblHrOut.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -477,37 +495,44 @@ public class TimeClockGUI extends JFrame {
 		satOutMin.setBounds(436, 562, 38, 27);
 		contentPane.add(satOutMin);
 
-		sunOutAMPMBox.setModel(new DefaultComboBoxModel(new String[] { "AM", "PM" }));
+		sunOutAMPMBox.setModel(
+				new DefaultComboBoxModel(new String[] { "AM", "PM" }));
 		sunOutAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		sunOutAMPMBox.setBounds(486, 267, 53, 27);
 		contentPane.add(sunOutAMPMBox);
 
-		monOutAMPMBox.setModel(new DefaultComboBoxModel(new String[] { "AM", "PM" }));
+		monOutAMPMBox.setModel(
+				new DefaultComboBoxModel(new String[] { "AM", "PM" }));
 		monOutAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		monOutAMPMBox.setBounds(486, 317, 53, 27);
 		contentPane.add(monOutAMPMBox);
 
-		tuesOutAMPMBox.setModel(new DefaultComboBoxModel(new String[] { "AM", "PM" }));
+		tuesOutAMPMBox.setModel(
+				new DefaultComboBoxModel(new String[] { "AM", "PM" }));
 		tuesOutAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		tuesOutAMPMBox.setBounds(486, 367, 53, 27);
 		contentPane.add(tuesOutAMPMBox);
 
-		wedOutAMPMBox.setModel(new DefaultComboBoxModel(new String[] { "AM", "PM" }));
+		wedOutAMPMBox.setModel(
+				new DefaultComboBoxModel(new String[] { "AM", "PM" }));
 		wedOutAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		wedOutAMPMBox.setBounds(486, 417, 53, 27);
 		contentPane.add(wedOutAMPMBox);
 
-		thursOutAMPMBox.setModel(new DefaultComboBoxModel(new String[] { "AM", "PM" }));
+		thursOutAMPMBox.setModel(
+				new DefaultComboBoxModel(new String[] { "AM", "PM" }));
 		thursOutAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		thursOutAMPMBox.setBounds(486, 467, 53, 27);
 		contentPane.add(thursOutAMPMBox);
 
-		friOutAMPMBox.setModel(new DefaultComboBoxModel(new String[] { "AM", "PM" }));
+		friOutAMPMBox.setModel(
+				new DefaultComboBoxModel(new String[] { "AM", "PM" }));
 		friOutAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		friOutAMPMBox.setBounds(486, 517, 53, 27);
 		contentPane.add(friOutAMPMBox);
 
-		satOutAMPMBox.setModel(new DefaultComboBoxModel(new String[] { "AM", "PM" }));
+		satOutAMPMBox.setModel(
+				new DefaultComboBoxModel(new String[] { "AM", "PM" }));
 		satOutAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		satOutAMPMBox.setBounds(486, 560, 53, 27);
 		contentPane.add(satOutAMPMBox);
@@ -551,8 +576,10 @@ public class TimeClockGUI extends JFrame {
 
 		JTextArea taxNotice = new JTextArea();
 		taxNotice.setBackground(new Color(135, 206, 250));
-		taxNotice.setText("Value calculated in the Net Pay\r\nField is" + " affected by these typical U.S taxes:"
-				+ "\r\nFederal Income Tax: 11% of Gross" + "\r\nSocial Security Tax: 6% of Gross"
+		taxNotice.setText("Value calculated in the Net Pay\r\nField is"
+				+ " affected by these typical U.S taxes:"
+				+ "\r\nFederal Income Tax: 11% of Gross"
+				+ "\r\nSocial Security Tax: 6% of Gross"
 				+ "\r\nMedicare Tax: 1.45% of Gross");
 		taxNotice.setFont(new Font("Arial Black", Font.PLAIN, 10));
 		taxNotice.setBounds(693, 865, 261, 88);
@@ -571,42 +598,49 @@ public class TimeClockGUI extends JFrame {
 		JLabel sunTotHrs = new JLabel("");
 		sunTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
 		sunTotHrs.setBackground(new Color(255, 255, 255));
+		sunTotHrs.setOpaque(true);
 		sunTotHrs.setBounds(738, 267, 99, 27);
 		contentPane.add(sunTotHrs);
 
 		JLabel monTotHrs = new JLabel("");
 		monTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
 		monTotHrs.setBackground(Color.WHITE);
+		monTotHrs.setOpaque(true);
 		monTotHrs.setBounds(738, 312, 99, 27);
 		contentPane.add(monTotHrs);
 
 		JLabel tuesTotHrs = new JLabel("");
 		tuesTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
 		tuesTotHrs.setBackground(Color.WHITE);
+		tuesTotHrs.setOpaque(true);
 		tuesTotHrs.setBounds(738, 362, 99, 27);
 		contentPane.add(tuesTotHrs);
 
 		JLabel wedTotHrs = new JLabel("");
 		wedTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
 		wedTotHrs.setBackground(Color.WHITE);
+		wedTotHrs.setOpaque(true);
 		wedTotHrs.setBounds(738, 412, 99, 27);
 		contentPane.add(wedTotHrs);
 
 		JLabel thusTotHrs = new JLabel("");
 		thusTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
 		thusTotHrs.setBackground(Color.WHITE);
+		thusTotHrs.setOpaque(true);
 		thusTotHrs.setBounds(738, 467, 99, 27);
 		contentPane.add(thusTotHrs);
 
 		JLabel friTotHrs = new JLabel("");
 		friTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
 		friTotHrs.setBackground(Color.WHITE);
+		friTotHrs.setOpaque(true);
 		friTotHrs.setBounds(738, 517, 99, 27);
 		contentPane.add(friTotHrs);
 
 		JLabel satTotHrs = new JLabel("");
 		satTotHrs.setFont(new Font("Tahoma", Font.BOLD, 20));
 		satTotHrs.setBackground(Color.WHITE);
+		satTotHrs.setOpaque(true);
 		satTotHrs.setBounds(738, 561, 99, 27);
 		contentPane.add(satTotHrs);
 
@@ -627,13 +661,211 @@ public class TimeClockGUI extends JFrame {
 		weekNetPay.setBackground(Color.WHITE);
 		weekNetPay.setBounds(738, 825, 99, 27);
 		contentPane.add(weekNetPay);
+
+		enterButton.addActionListener(this);
 	}
 
-	private void setDataArray() {
+	private void setWeekDataArray() {
 		// Sunday
-		dataArray[0][0] = Integer.parseInt(sunInHr.getText());
-		dataArray[0][1] = Integer.parseInt(sunInMin.getText());
-		// if(sunInAMPMBox.getSelectedItem().equals("AM")) {
-		// }
+		try {
+			week.weekData[0][0] = Integer.parseInt(sunInHr.getText());
+			week.weekData[0][1] = Integer.parseInt(sunInMin.getText());
+
+			if (sunInAMPMBox.getSelectedItem().equals("AM")) {
+				week.weekData[0][2] = 0;
+			} else {
+				week.weekData[0][2] = 1;
+			}
+
+			week.weekData[0][3] = Integer.parseInt(sunOutHr.getText());
+			week.weekData[0][4] =
+					Integer.parseInt(sunOutMin.getText());
+
+			if (sunOutAMPMBox.getSelectedItem().equals("AM")) {
+				week.weekData[0][5] = 0;
+			} else {
+				week.weekData[0][5] = 1;
+			}
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null,
+					"Could not parse Sunday input time!"
+							+ " Please enter a number.");
+		}
+
+		// Monday
+		try {
+
+			week.weekData[1][0] = Integer.parseInt(monInHr.getText());
+			week.weekData[1][1] = Integer.parseInt(monInMin.getText());
+
+			if (monInAMPMBox.getSelectedItem().equals("AM")) {
+				week.weekData[1][2] = 0;
+			} else {
+				week.weekData[1][2] = 1;
+			}
+
+			week.weekData[1][3] = Integer.parseInt(monOutHr.getText());
+			week.weekData[1][4] =
+					Integer.parseInt(monOutMin.getText());
+
+			if (monOutAMPMBox.getSelectedItem().equals("AM")) {
+				week.weekData[1][5] = 0;
+			} else {
+				week.weekData[1][5] = 1;
+			}
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null,
+					"Could not parse Monday input time!"
+							+ " Please enter a number.");
+		}
+
+		// Tuesday
+		try {
+
+			week.weekData[2][0] = Integer.parseInt(tuesInHr.getText());
+			week.weekData[2][1] =
+					Integer.parseInt(tuesInMin.getText());
+
+			if (tuesInAMPMBox.getSelectedItem().equals("AM")) {
+				week.weekData[2][2] = 0;
+			} else {
+				week.weekData[2][2] = 1;
+			}
+
+			week.weekData[2][3] =
+					Integer.parseInt(tuesOutHr.getText());
+			week.weekData[2][4] =
+					Integer.parseInt(tuesOutMin.getText());
+
+			if (tuesOutAMPMBox.getSelectedItem().equals("AM")) {
+				week.weekData[2][5] = 0;
+			} else {
+				week.weekData[2][5] = 1;
+			}
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null,
+					"Could not parse Tuesday input time!"
+							+ " Please enter a number.");
+		}
+
+		// Wednesday
+		try {
+			week.weekData[3][0] = Integer.parseInt(wedInHr.getText());
+			week.weekData[3][1] = Integer.parseInt(wedInMin.getText());
+
+			if (wedInAMPMBox.getSelectedItem().equals("AM")) {
+				week.weekData[3][2] = 0;
+			} else {
+				week.weekData[3][2] = 1;
+			}
+
+			week.weekData[3][3] = Integer.parseInt(wedOutHr.getText());
+			week.weekData[3][4] =
+					Integer.parseInt(wedOutMin.getText());
+
+			if (wedOutAMPMBox.getSelectedItem().equals("AM")) {
+				week.weekData[3][5] = 0;
+			} else {
+				week.weekData[3][5] = 1;
+			}
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null,
+					"Could not parse Wednesday input time!"
+							+ " Please enter a number.");
+		}
+		// Thursday
+		try {
+			week.weekData[4][0] =
+					Integer.parseInt(thursInHr.getText());
+			week.weekData[4][1] =
+					Integer.parseInt(thusInMin.getText());
+
+			if (thursInAMPMBox.getSelectedItem().equals("AM")) {
+				week.weekData[4][2] = 0;
+			} else {
+				week.weekData[4][2] = 1;
+			}
+
+			week.weekData[4][3] =
+					Integer.parseInt(thursOutHr.getText());
+			week.weekData[4][4] =
+					Integer.parseInt(thursOutMin.getText());
+
+			if (thursOutAMPMBox.getSelectedItem().equals("AM")) {
+				week.weekData[4][5] = 0;
+			} else {
+				week.weekData[4][5] = 1;
+			}
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null,
+					"Could not parse Thursday input time!"
+							+ " Please enter a number.");
+		}
+
+		// Friday
+		try {
+			week.weekData[5][0] = Integer.parseInt(friInHr.getText());
+			week.weekData[5][1] = Integer.parseInt(friInMin.getText());
+
+			if (friInAMPMBox.getSelectedItem().equals("AM")) {
+				week.weekData[5][2] = 0;
+			} else {
+				week.weekData[5][2] = 1;
+			}
+
+			week.weekData[5][3] = Integer.parseInt(friOutHr.getText());
+			week.weekData[5][4] =
+					Integer.parseInt(friOutMin.getText());
+
+			if (friOutAMPMBox.getSelectedItem().equals("AM")) {
+				week.weekData[5][5] = 0;
+			} else {
+				week.weekData[5][5] = 1;
+			}
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null,
+					"Could not parse Friday input time!"
+							+ " Please enter a number.");
+		}
+
+		// Saturday
+		try {
+			week.weekData[6][0] = Integer.parseInt(satInHr.getText());
+			week.weekData[6][1] = Integer.parseInt(satInMin.getText());
+
+			if (satInAMPMBox.getSelectedItem().equals("AM")) {
+				week.weekData[6][2] = 0;
+			} else {
+				week.weekData[6][2] = 1;
+			}
+
+			week.weekData[6][3] = Integer.parseInt(satOutHr.getText());
+			week.weekData[6][4] =
+					Integer.parseInt(satOutMin.getText());
+
+			if (satOutAMPMBox.getSelectedItem().equals("AM")) {
+				week.weekData[6][5] = 0;
+			} else {
+				week.weekData[6][5] = 1;
+			}
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null,
+					"Could not parse Saturday input time!"
+							+ " Please enter a number.");
+		}
+
+	}
+
+	public void actionPerformed(ActionEvent e) {
+
+		Object action = e.getSource();
+
+		if (enterButton == action) {
+			setWeekDataArray();
+			for (int x = 0; x < 6; x++) {
+				// For testing array contents
+				// System.out.println(week.weekData[0][x]);
+			}
+		}
 	}
 }

@@ -3,8 +3,9 @@ package timeClock;
 import java.util.GregorianCalendar;
 
 /**
- * Clock class. Contains methods that convert time units into hourly earnings.
- * This is handles most of the back-end calculating for the Time Clock.
+ * Clock class. Contains methods that convert time units into hourly
+ * earnings. This is handles most of the back-end calculating for the
+ * Time Clock.
  * 
  * @author Tyler Hay, Freeman Ogburn, Max Jensen
  *
@@ -12,23 +13,27 @@ import java.util.GregorianCalendar;
 public class Clock {
 
 	/**
-	 * Array that holds the in and out times for each day of the week, the AM/PM
-	 * settings of the time, and the total hours worked per day.
+	 * Array that holds the in and out times for each day of the week,
+	 * the AM/PM settings of the time, and the total hours worked per
+	 * day.
 	 */
-	int[][] weekData = new int[7][7];
+	int[][] weekData = new int[7][6];
 
 	/**
-	 * Object that holds the value representing Milliseconds in one hour.
+	 * Object that holds the value representing Milliseconds in one
+	 * hour.
 	 */
 	private final int millisInHour = (1000 * 60 * 60);
 
 	/**
-	 * Object that holds the value representing Milliseconds in one minute.
+	 * Object that holds the value representing Milliseconds in one
+	 * minute.
 	 */
 	private final int millisInMin = (1000 * 60);
 
 	/**
-	 * Object that holds the value representing Milliseconds in one second.
+	 * Object that holds the value representing Milliseconds in one
+	 * second.
 	 */
 	private final int millisInSec = 1000;
 
@@ -56,15 +61,9 @@ public class Clock {
 	 *            the second calendar with a given time
 	 * @return Time value in milliseconds
 	 */
-	public double calcTime(GregorianCalendar cal1, GregorianCalendar cal2) {
-		return cal1.getTimeInMillis() - cal2.getTimeInMillis();
-	}
 
-	public void setWeekArray(int[][] array) {
-		weekData = array;
-	}
-	
-	public double calcTime2(int time1H, int time1M, int time1AMPM, int time2H, int time2M, int time2AMPM) {
+	public double calcTime(int time1H, int time1M, int time1AMPM,
+			int time2H, int time2M, int time2AMPM) {
 		double toReturn = 0;
 
 		double time1 = 0;
@@ -73,16 +72,25 @@ public class Clock {
 		time1 = time1H + (time1M / 60.0);
 		time2 = time2H + (time2M / 60.0);
 
+		if (time1AMPM == 1) {
+			time1 += 12;
+		}
+
+		if (time1AMPM == 1) {
+			time2 += 12;
+		}
+
 		toReturn = time2 - time1;
 
 		return toReturn;
 	}
 
 	/**
-	 * Converts time in milliseconds into an hh:mm:ss:mmm formatted String
+	 * Converts time in milliseconds into an hh:mm:ss:mmm formatted
+	 * String
 	 * 
-	 * Still need write code to backfill zeroes if the hour/min/sec is one digit or
-	 * the millis is one or two digits
+	 * Still need write code to backfill zeroes if the hour/min/sec is
+	 * one digit or the millis is one or two digits
 	 * 
 	 * @param time
 	 *            numerical time value in milliseconds
@@ -143,7 +151,8 @@ public class Clock {
 	 *            numerical value representing hours "clocked-in"
 	 * @param money
 	 *            numerical value representing a sum of money
-	 * @return a quotient of money and time that represents earnings made per hour
+	 * @return a quotient of money and time that represents earnings
+	 *         made per hour
 	 */
 	// Still need to format the output to 2 decimal places
 	public double calcHourEarnings(double time, double money) {
@@ -157,7 +166,8 @@ public class Clock {
 	 *            numerical value representing time in minutes
 	 * @param money
 	 *            numerical value representing a sum of money
-	 * @return a quotient of money and time that represents earnings made per minute
+	 * @return a quotient of money and time that represents earnings
+	 *         made per minute
 	 */
 	// Still need to format the output to 2 decimal places
 	public double calcMinEarnings(double time, double money) {
@@ -171,7 +181,8 @@ public class Clock {
 	 *            numerical value representing time in seconds
 	 * @param money
 	 *            numerical value representing a sum of money
-	 * @return a quotient of money and time representing earnings made per second
+	 * @return a quotient of money and time representing earnings made
+	 *         per second
 	 */
 	// Still need to format the output to 2 decimal places
 	public double calcSecEarnings(double time, double money) {
