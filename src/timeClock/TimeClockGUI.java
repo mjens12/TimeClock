@@ -58,6 +58,10 @@ public class TimeClockGUI extends JFrame {
 	private JTextField friOutMin;
 	private JTextField satOutMin;
 	private JTextField payRateDollars;
+	
+	private Clock week = new Clock();
+	
+	int[][] dataArray = new int[7][7];
 
 	/**
 	 * Launch the application.
@@ -624,5 +628,12 @@ public class TimeClockGUI extends JFrame {
 		weekNetPay.setBackground(Color.WHITE);
 		weekNetPay.setBounds(738, 825, 99, 27);
 		contentPane.add(weekNetPay);
+		private void setDataArray () {
+		//Sunday
+		dataArray[0][0] = Integer.parseInt(sunInHr.getText());
+		dataArray[0][1] = Integer.parseInt(sunInMin.getText());
+		if(sunInAMPMBox.getSelectedItem().equals("AM")) {
+			
+		}
 	}
 }
