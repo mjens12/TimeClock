@@ -905,7 +905,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		double fri = 0;
 		double sat = 0;
 
-		for (int y = 0; y < 6; y++) {
+		for (int y = 0; y < 7; y++) {
 			int a = week.weekData[y][0];
 			int b = week.weekData[y][1];
 			int c = week.weekData[y][2];
@@ -955,6 +955,22 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 				df.format(sun + mon + tues + wed + thurs + fri + sat));
 	}
 
+	public void setTotalEarnings() {
+		double total = 0;
+		double dblHrs = 0;
+		double dblRate = 0;
+		String finalTxt = "";
+		
+		dblHrs = Double.parseDouble(weekTotHrs.getText());
+		dblRate = Double.parseDouble(payRateDollars.getText());
+		total = week.calcTotalEarnings(dblHrs, dblRate);
+		
+		finalTxt += "$";
+		finalTxt += df.format(total);
+		
+		weekGrossDollars.setText(finalTxt);
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 
 		Object action = e.getSource();
@@ -964,6 +980,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 			// to test array contents
 			// System.out.println(Arrays.deepToString(week.weekData));
 			updateCalcHrs();
+			setTotalEarnings();
 		}
 	}
 }
