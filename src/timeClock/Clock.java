@@ -77,20 +77,27 @@ public class Clock {
 		double time1 = 0;
 		double time2 = 0;
 
-		time1 = time1H + (time1M / 60.0);
-		time2 = time2H + (time2M / 60.0);
-
-		if (time1AMPM == 1) {
-			time1 += 12;
+		if (time1H < 1 || time1H > 12 || time1M < 0 || time1M > 59 || time2H < 1 || time2H > 12 || time2M < 0 || time2M > 59)
+		{
+			return 0.00;
 		}
+		else {
 
-		if (time2AMPM == 1) {
-			time2 += 12;
+			time1 = time1H + (time1M / 60.0);
+			time2 = time2H + (time2M / 60.0);
+	
+			if (time1AMPM == 1) {
+				time1 += 12;
+			}
+	
+			if (time2AMPM == 1) {
+				time2 += 12;
+			}
+	
+			toReturn = time2 - time1;
+	
+			return toReturn;
 		}
-
-		toReturn = time2 - time1;
-
-		return toReturn;
 	}
 
 	/**
