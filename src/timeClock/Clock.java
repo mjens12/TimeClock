@@ -38,6 +38,43 @@ public class Clock {
 	private final int millisInSec = 1000;
 
 	/**
+	 * Calculates total earnings with the time and rate passed in.
+	 * 
+	 * @param time
+	 *            numerical time value in milliseconds
+	 * @param rate
+	 *            numerical value representing dollar earnings per hour
+	 * @return Product of time and rate that represents total earnings
+	 */
+	// Still need to format the output to 2 decimal places
+	public double calcGrossEarnings(double time, double rate) {
+		return time * rate;
+	}
+	
+	/*
+	* Takes the gross pay and applies standard U.S taxes
+    * to calculate the net pay.
+    *
+    * @param grossPay double value of total dollars
+    * @return double value of net pay
+    */
+   public double calcNetEarnings(final double grossPay) {
+       
+       final double fedIncomeTax = 0.11;
+       final double socSecurityTax = 0.06;
+       final double medicareTax = 0.0145;
+       
+       final double fedTakeOut = grossPay * fedIncomeTax;
+       final double socTakeOut = grossPay * socSecurityTax;
+       final double medTakeOut = grossPay * medicareTax;
+       
+       double netPay = grossPay - fedTakeOut
+               - socTakeOut - medTakeOut;
+       
+       return netPay;
+   }
+	
+	/**
 	 * Calendar for current time (to use with running clock on GUI)
 	 */
 	GregorianCalendar currentTime = new GregorianCalendar();
@@ -68,6 +105,10 @@ public class Clock {
 				weekData[x][y] = 0;
 			}
 		}
+	}
+	
+	public void calcNetPay(double grossPay, double taxRate) {
+		
 	}
 
 	public double calcTime(int time1H, int time1M, int time1AMPM,
@@ -202,28 +243,5 @@ public class Clock {
 	// Still need to format the output to 2 decimal places
 	public double calcSecEarnings(double time, double money) {
 		return money / time;
-	}
-
-	/**
-	 * Sets inTime variable based on a passed String
-	 * 
-	 * @param in
-	 *            "clock-on" string input formatted into HH:MM:SS:mmm
-	 */
-	// NOT FINISHED
-	public void setInTime(String in) {
-		GregorianCalendar tempIn = new GregorianCalendar();
-	}
-
-	/**
-	 * Sets outTime variable based on a passed String
-	 * 
-	 * @param out
-	 *            "clock-out" string input formatted into HH:MM:SS:mmm
-	 */
-	// NOT FINISHED
-	public void setOutTime(String out) {
-		GregorianCalendar tempOut = new GregorianCalendar();
-
 	}
 }

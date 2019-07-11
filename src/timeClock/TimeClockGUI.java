@@ -971,6 +971,19 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		weekGrossDollars.setText(finalTxt);
 	}
 	
+	
+private void updatePay() {
+        
+        double payRate = Double.parseDouble(payRateDollars.getText());
+        
+        double grossPay = week.calcGrossEarnings(Double.parseDouble(weekTotHrs.getText()), payRate);
+        
+        double netPay = week.calcNetEarnings(grossPay);
+        
+        weekGrossDollars.setText("$" + df.format(grossPay));
+        weekNetPay.setText("$" + df.format(netPay));
+    }
+
 	public void actionPerformed(ActionEvent e) {
 
 		Object action = e.getSource();
@@ -980,7 +993,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 			// to test array contents
 			// System.out.println(Arrays.deepToString(week.weekData));
 			updateCalcHrs();
-			setTotalEarnings();
+			updatePay();
 		}
 	}
 }
