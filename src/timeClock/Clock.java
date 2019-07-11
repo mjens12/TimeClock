@@ -84,7 +84,7 @@ public class Clock {
 			time1 += 12;
 		}
 
-		if (time1AMPM == 1) {
+		if (time2AMPM == 1) {
 			time2 += 12;
 		}
 

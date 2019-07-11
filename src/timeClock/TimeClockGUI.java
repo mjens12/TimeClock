@@ -138,10 +138,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 	 */
 	public TimeClockGUI() {
 		setBackground(new Color(255, 255, 255));
-		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage(TimeClockGUI.class.getResource(
-						"/com/sun/javafx/scene/control/skin"
-								+ "/caspian/dialog-more-details@2x.png")));
+		
 		setTitle("CS350 Punch Clock");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 1000);
@@ -194,6 +191,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(lblSaturday);
 
 		wedInHr = new JTextField();
+		wedInHr.setText("0");
 		wedInHr.setToolTipText("");
 		wedInHr.setFont(new Font("Tahoma", Font.BOLD, 20));
 		wedInHr.setBounds(184, 417, 38, 27);
@@ -201,6 +199,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		wedInHr.setColumns(10);
 
 		sunInHr = new JTextField();
+		sunInHr.setText("0");
 		sunInHr.setFont(new Font("Tahoma", Font.BOLD, 20));
 		sunInHr.setToolTipText("");
 		sunInHr.setBounds(184, 267, 38, 27);
@@ -208,6 +207,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		sunInHr.setColumns(10);
 
 		monInHr = new JTextField();
+		monInHr.setText("0");
 		monInHr.setToolTipText("");
 		monInHr.setFont(new Font("Tahoma", Font.BOLD, 20));
 		monInHr.setBounds(184, 317, 38, 27);
@@ -215,6 +215,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		monInHr.setColumns(10);
 
 		tuesInHr = new JTextField();
+		tuesInHr.setText("0");
 		tuesInHr.setToolTipText("");
 		tuesInHr.setFont(new Font("Tahoma", Font.BOLD, 20));
 		tuesInHr.setBounds(184, 367, 38, 27);
@@ -222,6 +223,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		tuesInHr.setColumns(10);
 
 		thursInHr = new JTextField();
+		thursInHr.setText("0");
 		thursInHr.setToolTipText("");
 		thursInHr.setFont(new Font("Tahoma", Font.BOLD, 20));
 		thursInHr.setBounds(184, 467, 38, 27);
@@ -229,6 +231,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		thursInHr.setColumns(10);
 
 		friInHr = new JTextField();
+		friInHr.setText("0");
 		friInHr.setToolTipText("");
 		friInHr.setFont(new Font("Tahoma", Font.BOLD, 20));
 		friInHr.setBounds(184, 517, 38, 27);
@@ -236,6 +239,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		friInHr.setColumns(10);
 
 		satInHr = new JTextField();
+		satInHr.setText("0");
 		satInHr.setToolTipText("");
 		satInHr.setFont(new Font("Tahoma", Font.BOLD, 20));
 		satInHr.setBounds(184, 561, 38, 27);
@@ -283,6 +287,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(lblHrIn);
 
 		sunInMin = new JTextField();
+		sunInMin.setText("00"); //initial minutes set to 00
 		sunInMin.setToolTipText("");
 		sunInMin.setFont(new Font("Tahoma", Font.BOLD, 20));
 		sunInMin.setBounds(237, 267, 38, 27);
@@ -295,6 +300,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(lblMinIn);
 
 		monInMin = new JTextField();
+		monInMin.setText("00");
 		monInMin.setToolTipText("");
 		monInMin.setFont(new Font("Tahoma", Font.BOLD, 20));
 		monInMin.setColumns(10);
@@ -302,6 +308,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(monInMin);
 
 		tuesInMin = new JTextField();
+		tuesInMin.setText("00");
 		tuesInMin.setToolTipText("");
 		tuesInMin.setFont(new Font("Tahoma", Font.BOLD, 20));
 		tuesInMin.setColumns(10);
@@ -309,6 +316,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(tuesInMin);
 
 		wedInMin = new JTextField();
+		wedInMin.setText("00");
 		wedInMin.setToolTipText("");
 		wedInMin.setFont(new Font("Tahoma", Font.BOLD, 20));
 		wedInMin.setColumns(10);
@@ -316,6 +324,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(wedInMin);
 
 		thusInMin = new JTextField();
+		thusInMin.setText("00");
 		thusInMin.setToolTipText("");
 		thusInMin.setFont(new Font("Tahoma", Font.BOLD, 20));
 		thusInMin.setColumns(10);
@@ -323,6 +332,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(thusInMin);
 
 		friInMin = new JTextField();
+		friInMin.setText("00");
 		friInMin.setToolTipText("");
 		friInMin.setFont(new Font("Tahoma", Font.BOLD, 20));
 		friInMin.setColumns(10);
@@ -330,6 +340,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(friInMin);
 
 		satInMin = new JTextField();
+		satInMin.setText("00");
 		satInMin.setToolTipText("");
 		satInMin.setFont(new Font("Tahoma", Font.BOLD, 20));
 		satInMin.setColumns(10);
@@ -393,6 +404,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(lblHrOut);
 
 		sunOutHr = new JTextField();
+		sunOutHr.setText("0");
 		sunOutHr.setToolTipText("");
 		sunOutHr.setFont(new Font("Tahoma", Font.BOLD, 20));
 		sunOutHr.setColumns(10);
@@ -400,6 +412,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(sunOutHr);
 
 		monOutHr = new JTextField();
+		monOutHr.setText("0");
 		monOutHr.setToolTipText("");
 		monOutHr.setFont(new Font("Tahoma", Font.BOLD, 20));
 		monOutHr.setColumns(10);
@@ -407,6 +420,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(monOutHr);
 
 		tuesOutHr = new JTextField();
+		tuesOutHr.setText("0");
 		tuesOutHr.setToolTipText("");
 		tuesOutHr.setFont(new Font("Tahoma", Font.BOLD, 20));
 		tuesOutHr.setColumns(10);
@@ -414,6 +428,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(tuesOutHr);
 
 		wedOutHr = new JTextField();
+		wedOutHr.setText("0");
 		wedOutHr.setToolTipText("");
 		wedOutHr.setFont(new Font("Tahoma", Font.BOLD, 20));
 		wedOutHr.setColumns(10);
@@ -421,6 +436,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(wedOutHr);
 
 		thursOutHr = new JTextField();
+		thursOutHr.setText("0");
 		thursOutHr.setToolTipText("");
 		thursOutHr.setFont(new Font("Tahoma", Font.BOLD, 20));
 		thursOutHr.setColumns(10);
@@ -428,6 +444,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(thursOutHr);
 
 		friOutHr = new JTextField();
+		friOutHr.setText("0");
 		friOutHr.setToolTipText("");
 		friOutHr.setFont(new Font("Tahoma", Font.BOLD, 20));
 		friOutHr.setColumns(10);
@@ -435,6 +452,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(friOutHr);
 
 		satOutHr = new JTextField();
+		satOutHr.setText("0");
 		satOutHr.setToolTipText("");
 		satOutHr.setFont(new Font("Tahoma", Font.BOLD, 20));
 		satOutHr.setColumns(10);
@@ -474,6 +492,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(lblMinOut);
 
 		sunOutMin = new JTextField();
+		sunOutMin.setText("00");
 		sunOutMin.setToolTipText("");
 		sunOutMin.setFont(new Font("Tahoma", Font.BOLD, 20));
 		sunOutMin.setColumns(10);
@@ -481,6 +500,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(sunOutMin);
 
 		monOutMin = new JTextField();
+		monOutMin.setText("00");
 		monOutMin.setToolTipText("");
 		monOutMin.setFont(new Font("Tahoma", Font.BOLD, 20));
 		monOutMin.setColumns(10);
@@ -488,6 +508,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(monOutMin);
 
 		tuesOutMin = new JTextField();
+		tuesOutMin.setText("00");
 		tuesOutMin.setToolTipText("");
 		tuesOutMin.setFont(new Font("Tahoma", Font.BOLD, 20));
 		tuesOutMin.setColumns(10);
@@ -495,6 +516,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(tuesOutMin);
 
 		wedOutMin = new JTextField();
+		wedOutMin.setText("00");
 		wedOutMin.setToolTipText("");
 		wedOutMin.setFont(new Font("Tahoma", Font.BOLD, 20));
 		wedOutMin.setColumns(10);
@@ -502,6 +524,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(wedOutMin);
 
 		thursOutMin = new JTextField();
+		thursOutMin.setText("00");
 		thursOutMin.setToolTipText("");
 		thursOutMin.setFont(new Font("Tahoma", Font.BOLD, 20));
 		thursOutMin.setColumns(10);
@@ -509,6 +532,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(thursOutMin);
 
 		friOutMin = new JTextField();
+		friOutMin.setText("00");
 		friOutMin.setToolTipText("");
 		friOutMin.setFont(new Font("Tahoma", Font.BOLD, 20));
 		friOutMin.setColumns(10);
@@ -516,6 +540,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(friOutMin);
 
 		satOutMin = new JTextField();
+		satOutMin.setText("00");
 		satOutMin.setToolTipText("");
 		satOutMin.setFont(new Font("Tahoma", Font.BOLD, 20));
 		satOutMin.setColumns(10);
@@ -585,6 +610,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(lblPayRate);
 
 		payRateDollars = new JTextField();
+		payRateDollars.setText("10.00");
 		payRateDollars.setToolTipText("");
 		payRateDollars.setFont(new Font("Tahoma", Font.BOLD, 20));
 		payRateDollars.setColumns(10);
