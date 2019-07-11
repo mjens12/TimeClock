@@ -93,21 +93,64 @@ public class Clock {
 			return 0.00;
 		}
 		else {
+			if(time1AMPM>time2AMPM) //if it's a PM to AM Shift
+			{
+				time1 = time1H + (time1M / 60.0);
+				time2 = time2H + (time2M / 60.0);
 
-			time1 = time1H + (time1M / 60.0);
-			time2 = time2H + (time2M / 60.0);
-	
-			if (time1AMPM == 1) {
-				time1 += 12;
+				if (time1AMPM == 1) {
+					time1 += 12;
+				}
+
+				if (time2AMPM == 1) {
+					time2 += 12;
+				}
+
+				toReturn = time2 - time1;
+
+				return toReturn +24; //IMPORTANT, ALLOWS ROLLOVER FOR LATE NIGHT SHIFT
+
 			}
-	
-			if (time2AMPM == 1) {
-				time2 += 12;
+			else if(time1AMPM==time2AMPM) //if it's an AM to AM or PM to PM Shift
+			{
+				time1 = time1H + (time1M / 60.0);
+				time2 = time2H + (time2M / 60.0);
+
+				if (time1AMPM == 1) {
+					time1 += 12;
+				}
+
+				if (time2AMPM == 1) {
+					time2 += 12;
+				}
+
+				toReturn = time2 - time1;
+
+				if(time1H>time2H) {
+					return toReturn +24; //IMPORTANT
+				}
+				else {
+					return toReturn;
+				}
+
 			}
-	
-			toReturn = time2 - time1;
-	
-			return toReturn;
+
+			else { // if its AMto PM shift
+				time1 = time1H + (time1M / 60.0);
+				time2 = time2H + (time2M / 60.0);
+
+				if (time1AMPM == 1) {
+					time1 += 12;
+				}
+
+				if (time2AMPM == 1) {
+					time2 += 12;
+				}
+
+				toReturn = time2 - time1;
+
+				return toReturn;
+			}
 		}
 	}
 
