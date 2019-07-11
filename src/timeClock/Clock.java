@@ -1,7 +1,5 @@
 package timeClock;
 
-import java.util.GregorianCalendar;
-
 /**
  * Clock class. Contains methods that convert time units into hourly
  * earnings. This is handles most of the back-end calculating for the
@@ -73,31 +71,6 @@ public class Clock {
        
        return netPay;
    }
-	
-	/**
-	 * Calendar for current time (to use with running clock on GUI)
-	 */
-	GregorianCalendar currentTime = new GregorianCalendar();
-
-	/**
-	 * Calendar for the "clock-in" time
-	 */
-	GregorianCalendar inTime = new GregorianCalendar();
-
-	/**
-	 * Calendar for the "clock-out time"
-	 */
-	GregorianCalendar outTime = new GregorianCalendar();
-
-	/**
-	 * Calculates the time in milliseconds between two calendars
-	 * 
-	 * @param cal1
-	 *            the first calendar with a given time
-	 * @param cal2
-	 *            the second calendar with a given time
-	 * @return Time value in milliseconds
-	 */
 
 	public void zeroDataArray() {
 		for (int x = 0; x < 7; x++) {
@@ -107,9 +80,6 @@ public class Clock {
 		}
 	}
 	
-	public void calcNetPay(double grossPay, double taxRate) {
-		
-	}
 
 	public double calcTime(int time1H, int time1M, int time1AMPM,
 			int time2H, int time2M, int time2AMPM) {
@@ -139,51 +109,6 @@ public class Clock {
 	
 			return toReturn;
 		}
-	}
-
-	/**
-	 * Converts time in milliseconds into an hh:mm:ss:mmm formatted
-	 * String
-	 * 
-	 * Still need write code to backfill zeroes if the hour/min/sec is
-	 * one digit or the millis is one or two digits
-	 * 
-	 * @param time
-	 *            numerical time value in milliseconds
-	 * @return String object in the format of HH:MM:SS:mmm
-	 */
-	public String convToTime(double time) {
-		String hours = "00";
-		String mins = "00";
-		String secs = "00";
-		String millis = "000";
-		String toReturn = "";
-
-		if ((time / (millisInHour)) >= 1) {
-			int hoursTemp = (int) (time / (millisInHour));
-			time = time - (hoursTemp * millisInHour);
-			hours = String.valueOf(hoursTemp);
-		}
-
-		if ((time / (millisInMin)) >= 1) {
-			int minsTemp = (int) (time / (millisInMin));
-			time = time - (minsTemp * millisInMin);
-			mins = String.valueOf(minsTemp);
-		}
-
-		if ((time / (millisInSec)) >= 1) {
-			int secsTemp = (int) (time / (millisInSec));
-			time = time - (secsTemp * millisInSec);
-			secs = String.valueOf(secsTemp);
-		}
-
-		if (time > 0) {
-			millis = String.valueOf((int) time);
-		}
-
-		toReturn = (hours + ":" + mins + ":" + secs + ":" + millis);
-
-		return toReturn;
 	}
 
 	/**

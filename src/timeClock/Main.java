@@ -6,6 +6,5 @@ public class Main {
 		Clock first = new Clock();
 		System.out.println((first.calcTotalEarnings(5.5, 15)));
 		System.out.println(first.calcHourEarnings(10, 100));
-		System.out.println(first.convToTime(100000));
 	}
 }
