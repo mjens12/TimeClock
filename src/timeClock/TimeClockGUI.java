@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
+import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -16,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 
 /**
@@ -31,6 +33,10 @@ import javax.swing.border.EmptyBorder;
  */
 public class TimeClockGUI extends JFrame implements ActionListener {
 
+	private ActionListener updateClockAction;
+
+	Timer t = new Timer(1000, updateClockAction);
+
 	/**
 	 * Default serial ID.
 	 */
@@ -41,190 +47,193 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 
 	/** JPanel to hold the GUI contents. **/
 	private JPanel contentPane;
-	
-	/** JTextField for user to enter in
-	 *  Wednesday clock-in hour.
+
+	/**
+	 * JTextField for user to enter in Wednesday clock-in hour.
 	 */
 	private JTextField wedInHr;
-	
-	/** JTextField for user to enter in
-	 *  Sunday clock-in hour.
+
+	/**
+	 * JTextField for user to enter in Sunday clock-in hour.
 	 */
 	private JTextField sunInHr;
-	
-	/** JTextField for user to enter in
-	 *  Monday clock-in hour.
+
+	/**
+	 * JTextField for user to enter in Monday clock-in hour.
 	 */
 	private JTextField monInHr;
-	
-	/** JTextField for user to enter in
-	 *  Tuesday clock-in hour.
+
+	/**
+	 * JTextField for user to enter in Tuesday clock-in hour.
 	 */
 	private JTextField tuesInHr;
-	
-	/** JTextField for user to enter in
-	 *  Thursday clock-in hour.
+
+	/**
+	 * JTextField for user to enter in Thursday clock-in hour.
 	 */
 	private JTextField thursInHr;
-	
-	/** JTextField for user to enter in
-	 *  Friday clock-in hour.
+
+	/**
+	 * JTextField for user to enter in Friday clock-in hour.
 	 */
 	private JTextField friInHr;
-	
-	/** JTextField for user to enter in
-	 *  Saturday clock-in hour.
+
+	/**
+	 * JTextField for user to enter in Saturday clock-in hour.
 	 */
 	private JTextField satInHr;
-	
-	/** JTextField for user to enter in
-	 *  Sunday clock-in hour.
+
+	/**
+	 * JTextField for user to enter in Sunday clock-in hour.
 	 */
 	private JTextField sunInMin;
-	
-	/** JTextField for user to enter in
-	 *  Monday clock-in minute.
+
+	/**
+	 * JTextField for user to enter in Monday clock-in minute.
 	 */
 	private JTextField monInMin;
-	
-	/** JTextField for user to enter in
-	 *  Tuesday clock-in minute.
+
+	/**
+	 * JTextField for user to enter in Tuesday clock-in minute.
 	 */
 	private JTextField tuesInMin;
-	
-	/** JTextField for user to enter in
-	 *  Wednesday clock-in minute.
+
+	/**
+	 * JTextField for user to enter in Wednesday clock-in minute.
 	 */
 	private JTextField wedInMin;
-	
-	/** JTextField for user to enter in
-	 *  Thursday clock-in minute.
+
+	/**
+	 * JTextField for user to enter in Thursday clock-in minute.
 	 */
 	private JTextField thusInMin;
-	
-	/** JTextField for user to enter in
-	 *  Friday clock-in minute.
+
+	/**
+	 * JTextField for user to enter in Friday clock-in minute.
 	 */
 	private JTextField friInMin;
-	
-	/** JTextField for user to enter in
-	 *  Saturday clock-in minute.
+
+	/**
+	 * JTextField for user to enter in Saturday clock-in minute.
 	 */
 	private JTextField satInMin;
-	
-	/** JTextField for user to enter in
-	 *  Sunday clock-out hour.
+
+	/**
+	 * JTextField for user to enter in Sunday clock-out hour.
 	 */
 	private JTextField sunOutHr;
-	
-	/** JTextField for user to enter in
-	 *  Monday clock-out hour.
+
+	/**
+	 * JTextField for user to enter in Monday clock-out hour.
 	 */
 	private JTextField monOutHr;
-	
-	/** JTextField for user to enter in
-	 *  Tuesday clock-out hour.
+
+	/**
+	 * JTextField for user to enter in Tuesday clock-out hour.
 	 */
 	private JTextField tuesOutHr;
-	
-	/** JTextField for user to enter in
-	 *  Wednesday clock-out hour.
+
+	/**
+	 * JTextField for user to enter in Wednesday clock-out hour.
 	 */
 	private JTextField wedOutHr;
-	
-	/** JTextField for user to enter in
-	 *  Thursday clock-out hour.
+
+	/**
+	 * JTextField for user to enter in Thursday clock-out hour.
 	 */
 	private JTextField thursOutHr;
-	
-	/** JTextField for user to enter in
-	 *  Friday clock-out hour.
+
+	/**
+	 * JTextField for user to enter in Friday clock-out hour.
 	 */
 	private JTextField friOutHr;
-	
-	/** JTextField for user to enter in
-	 *  Saturday clock-out hour.
+
+	/**
+	 * JTextField for user to enter in Saturday clock-out hour.
 	 */
 	private JTextField satOutHr;
-	
-	/** JTextField for user to enter in
-	 *  Sunday clock-out minute.
+
+	/**
+	 * JTextField for user to enter in Sunday clock-out minute.
 	 */
 	private JTextField sunOutMin;
-	
-	/** JTextField for user to enter in
-	 *  Monday clock-out minute.
+
+	/**
+	 * JTextField for user to enter in Monday clock-out minute.
 	 */
 	private JTextField monOutMin;
-	
-	/** JTextField for user to enter in
-	 *  Tuesday clock-out minute.
+
+	/**
+	 * JTextField for user to enter in Tuesday clock-out minute.
 	 */
 	private JTextField tuesOutMin;
-	
-	/** JTextField for user to enter in
-	 *  Wednesday clock-out minute.
+
+	/**
+	 * JTextField for user to enter in Wednesday clock-out minute.
 	 */
 	private JTextField wedOutMin;
-	
-	/** JTextField for user to enter in
-	 *  Thursday clock-out minute.
+
+	/**
+	 * JTextField for user to enter in Thursday clock-out minute.
 	 */
 	private JTextField thursOutMin;
-	
-	/** JTextField for user to enter in
-	 *  Friday clock-out minute.
+
+	/**
+	 * JTextField for user to enter in Friday clock-out minute.
 	 */
 	private JTextField friOutMin;
-	
-	/** JTextField for user to enter in
-	 *  Saturday clock-out minute.
+
+	/**
+	 * JTextField for user to enter in Saturday clock-out minute.
 	 */
 	private JTextField satOutMin;
-	
-	/** JTextField for user to enter in
-	 *  their pay rate. */
+
+	/**
+	 * JTextField for user to enter in their pay rate.
+	 */
 	private JTextField payRateDollars;
 
 	/** JLabel for clock-out section. **/
 	private JLabel lblClockout = new JLabel("OUT");
-	
+
 	/** JLabel for Time Worked Section. **/
 	private JLabel lblDailyHrs = new JLabel("TIME WORKED");
-	
+
 	/** JLabel for weekly total hours. **/
 	private JLabel lblTotalHrs = new JLabel("WEEKLY TOTAL");
-	
+
 	/** JLabel for weekly gross income. **/
 	private JLabel lblGrossDollars = new JLabel("GROSS INCOME");
-	
+
 	/** JLabel for pay rate. **/
 	private JLabel lblPayRate = new JLabel("Pay Rate");
-	
+
+	private JLabel clock = new JLabel("00:00");
+
 	/** JLabel for pay rate per hour. **/
 	private JLabel lblPerHr = new JLabel("Per Hour");
-	
+
 	/** JLabel for ":" in hour format. **/
 	private JLabel sColonLbl8 = new JLabel(":");
-	
+
 	/** JLabel for ":" in hour format. **/
 	private JLabel sColonLbl9 = new JLabel(":");
-	
+
 	/** JLabel for ":" in hour format. **/
 	private JLabel sColonLbl10 = new JLabel(":");
-	
+
 	/** JLabel for ":" in hour format. **/
 	private JLabel sColonLbl11 = new JLabel(":");
-	
+
 	/** JLabel for ":" in hour format. **/
 	private JLabel sColonLbl12 = new JLabel(":");
-	
+
 	/** JLabel for ":" in hour format. **/
 	private JLabel sColonLbl13 = new JLabel(":");
-	
+
 	/** JLabel for ":" in hour format. **/
 	private JLabel sColonLbl14 = new JLabel(":");
-	
+
 	/** Jlabel for clock-out minute section. **/
 	private JLabel lblMinOut = new JLabel("Min");
 
@@ -233,79 +242,79 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 
 	/** JLabel for weekly hours section. **/
 	private JLabel lblWeeklyHrs = new JLabel("Hours");
-	
+
 	/** JLabel for net pay. **/
 	private JLabel lblNetPay = new JLabel("NET PAY");
 
 	/** JLabel that updates with weekly total hours. **/
 	private JLabel weekTotHrs = new JLabel("");
-	
+
 	/** JLabel that updates with weekly gross income. **/
 	private JLabel weekGrossDollars = new JLabel("");
-	
+
 	/** JLabel that updates with weekly net pay. **/
 	private JLabel weekNetPay = new JLabel("");
 
 	/** JComboBox for Sunday clock-in AM/PM choice. **/
 	private JComboBox sunInAMPMBox = new JComboBox();
-	
+
 	/** JComboBox for Monday clock-in AM/PM choice. **/
 	private JComboBox monInAMPMBox = new JComboBox();
-	
+
 	/** JComboBox for Tuesday clock-in AM/PM choice. **/
 	private JComboBox tuesInAMPMBox = new JComboBox();
-	
+
 	/** JComboBox for Wednesday clock-in AM/PM choice. **/
 	private JComboBox wedInAMPMBox = new JComboBox();
-	
+
 	/** JComboBox for Thursday clock-in AM/PM choice. **/
 	private JComboBox thursInAMPMBox = new JComboBox();
-	
+
 	/** JComboBox for Friday clock-in AM/PM choice. **/
 	private JComboBox friInAMPMBox = new JComboBox();
-	
+
 	/** JComboBox for Saturday clock-in AM/PM choice. **/
 	private JComboBox satInAMPMBox = new JComboBox();
-	
+
 	/** JComboBox for Sunday clock-out AM/PM choice. **/
-    private JComboBox sunOutAMPMBox = new JComboBox();
-    
-    /** JComboBox for Monday clock-out AM/PM choice. **/
+	private JComboBox sunOutAMPMBox = new JComboBox();
+
+	/** JComboBox for Monday clock-out AM/PM choice. **/
 	private JComboBox monOutAMPMBox = new JComboBox();
-	
+
 	/** JComboBox for Tuesday clock-out AM/PM choice. **/
 	private JComboBox tuesOutAMPMBox = new JComboBox();
-	
+
 	/** JComboBox for Wednesday clock-out AM/PM choice. **/
 	private JComboBox wedOutAMPMBox = new JComboBox();
-	
+
 	/** JComboBox for Thursday clock-out AM/PM choice. **/
 	private JComboBox thursOutAMPMBox = new JComboBox();
-	
+
 	/** JComboBox for Friday clock-out AM/PM choice. **/
 	private JComboBox friOutAMPMBox = new JComboBox();
-	
+
 	/** JComboBox for Saturday clock-out AM/PM choice. **/
 	private JComboBox satOutAMPMBox = new JComboBox();
 
 	/** JLabel that updates with Sunday total hours. **/
 	private JLabel sunTotHrs = new JLabel("");
-	
+
 	/** JLabel that updates with Monday total hours. **/
 	private JLabel monTotHrs = new JLabel("");
-	
+
 	/** JLabel that updates with Tuesday total hours. **/
 	private JLabel tuesTotHrs = new JLabel("");
-	
+
 	/** JLabel that updates with Wednesday total hours. **/
 	private JLabel wedTotHrs = new JLabel("");
-	
+
 	/** JLabel that updates with Thursday total hours. **/
 	private JLabel thusTotHrs = new JLabel("");
-	
+
 	/** JLabel that updates with Friday total hours. **/
 	private JLabel friTotHrs = new JLabel("");
-	
+
 	/** JLabel that updates with Saturday total hours. **/
 	private JLabel satTotHrs = new JLabel("");
 
@@ -317,7 +326,9 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 
 	/**
 	 * Main method that launches the GUI.
-	 * @param args default argument
+	 * 
+	 * @param args
+	 *            default argument
 	 */
 	public static void main(final String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -336,8 +347,11 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 	 * TimeClockGUI Constructor.
 	 */
 	public TimeClockGUI() {
+		t.start();
+		t.addActionListener(this);
+
 		setBackground(new Color(255, 255, 255));
-		
+
 		setTitle("CS350 Punch Clock");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 1000);
@@ -350,8 +364,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		JLabel lblPunchClock =
 				new JLabel("Punch Clock & Wage Calculator");
 		lblPunchClock.setFont(
-				new Font("Arial Rounded MT Bold",
-						Font.BOLD, 30));
+				new Font("Arial Rounded MT Bold", Font.BOLD, 30));
 		lblPunchClock.setBounds(237, 45, 531, 48);
 		contentPane.add(lblPunchClock);
 
@@ -487,7 +500,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(lblHrIn);
 
 		sunInMin = new JTextField();
-		sunInMin.setText("00"); //initial minutes set to 00
+		sunInMin.setText("00"); // initial minutes set to 00
 		sunInMin.setToolTipText("");
 		sunInMin.setFont(new Font("Tahoma", Font.BOLD, 20));
 		sunInMin.setBounds(237, 267, 38, 27);
@@ -554,49 +567,42 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 
 		sunInAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		sunInAMPMBox.setModel(
-				new DefaultComboBoxModel(
-						new String[] {"AM", "PM"}));
+				new DefaultComboBoxModel(new String[] { "AM", "PM" }));
 		sunInAMPMBox.setBounds(287, 267, 53, 27);
 		contentPane.add(sunInAMPMBox);
 
 		monInAMPMBox.setModel(
-				new DefaultComboBoxModel(
-						new String[] {"AM", "PM"}));
+				new DefaultComboBoxModel(new String[] { "AM", "PM" }));
 		monInAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		monInAMPMBox.setBounds(287, 317, 53, 27);
 		contentPane.add(monInAMPMBox);
 
 		tuesInAMPMBox.setModel(
-				new DefaultComboBoxModel(
-						new String[] {"AM", "PM"}));
+				new DefaultComboBoxModel(new String[] { "AM", "PM" }));
 		tuesInAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		tuesInAMPMBox.setBounds(287, 367, 53, 27);
 		contentPane.add(tuesInAMPMBox);
 
 		wedInAMPMBox.setModel(
-				new DefaultComboBoxModel(
-						new String[] {"AM", "PM"}));
+				new DefaultComboBoxModel(new String[] { "AM", "PM" }));
 		wedInAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		wedInAMPMBox.setBounds(287, 417, 53, 27);
 		contentPane.add(wedInAMPMBox);
 
 		thursInAMPMBox.setModel(
-				new DefaultComboBoxModel(
-						new String[] {"AM", "PM"}));
+				new DefaultComboBoxModel(new String[] { "AM", "PM" }));
 		thursInAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		thursInAMPMBox.setBounds(287, 467, 53, 27);
 		contentPane.add(thursInAMPMBox);
 
 		friInAMPMBox.setModel(
-				new DefaultComboBoxModel(
-						new String[] {"AM", "PM"}));
+				new DefaultComboBoxModel(new String[] { "AM", "PM" }));
 		friInAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		friInAMPMBox.setBounds(287, 519, 53, 27);
 		contentPane.add(friInAMPMBox);
 
 		satInAMPMBox.setModel(
-				new DefaultComboBoxModel(
-						new String[] {"AM", "PM"}));
+				new DefaultComboBoxModel(new String[] { "AM", "PM" }));
 		satInAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		satInAMPMBox.setBounds(287, 563, 53, 27);
 		contentPane.add(satInAMPMBox);
@@ -755,50 +761,43 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(satOutMin);
 
 		sunOutAMPMBox.setModel(
-				new DefaultComboBoxModel(
-						new String[] {"PM", "AM"}));
+				new DefaultComboBoxModel(new String[] { "PM", "AM" }));
 		sunOutAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		sunOutAMPMBox.setBounds(486, 267, 53, 27);
 		contentPane.add(sunOutAMPMBox);
 
 		monOutAMPMBox.setModel(
-				new DefaultComboBoxModel(
-						new String[] {"PM", "AM"}));
+				new DefaultComboBoxModel(new String[] { "PM", "AM" }));
 		monOutAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		monOutAMPMBox.setBounds(486, 317, 53, 27);
 		contentPane.add(monOutAMPMBox);
 
 		tuesOutAMPMBox.setModel(
-				new DefaultComboBoxModel(
-						new String[] {"PM", "AM"}));
+				new DefaultComboBoxModel(new String[] { "PM", "AM" }));
 		tuesOutAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		tuesOutAMPMBox.setBounds(486, 367, 53, 27);
 		contentPane.add(tuesOutAMPMBox);
 
 		wedOutAMPMBox.setModel(
-				new DefaultComboBoxModel(
-						new String[] {"PM", "AM"}));
+				new DefaultComboBoxModel(new String[] { "PM", "AM" }));
 		wedOutAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		wedOutAMPMBox.setBounds(486, 417, 53, 27);
 		contentPane.add(wedOutAMPMBox);
 
 		thursOutAMPMBox.setModel(
-				new DefaultComboBoxModel(
-						new String[] {"PM", "AM"}));
+				new DefaultComboBoxModel(new String[] { "PM", "AM" }));
 		thursOutAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		thursOutAMPMBox.setBounds(486, 467, 53, 27);
 		contentPane.add(thursOutAMPMBox);
 
 		friOutAMPMBox.setModel(
-				new DefaultComboBoxModel(
-						new String[] {"PM", "AM"}));
+				new DefaultComboBoxModel(new String[] { "PM", "AM" }));
 		friOutAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		friOutAMPMBox.setBounds(486, 517, 53, 27);
 		contentPane.add(friOutAMPMBox);
 
 		satOutAMPMBox.setModel(
-				new DefaultComboBoxModel(
-						new String[] {"PM", "AM"}));
+				new DefaultComboBoxModel(new String[] { "PM", "AM" }));
 		satOutAMPMBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		satOutAMPMBox.setBounds(486, 560, 53, 27);
 		contentPane.add(satOutAMPMBox);
@@ -822,6 +821,10 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		lblPayRate.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblPayRate.setBounds(48, 623, 98, 25);
 		contentPane.add(lblPayRate);
+
+		clock.setFont(new Font("Tahoma", Font.BOLD, 20));
+		clock.setBounds(48, 675, 500, 25);
+		contentPane.add(clock);
 
 		setPayRateDollars(new JTextField());
 		getPayRateDollars().setText("10.00");
@@ -917,25 +920,21 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * Fills the WeekData Array with information from
-	 * user input.
+	 * Fills the WeekData Array with information from user input.
 	 * 
-	 * The method goes through every day of the week and
-	 * parses in the Hours, Minutes, and AM/PM choice for
-	 * both the clock-in and clock-out times.
+	 * The method goes through every day of the week and parses in the
+	 * Hours, Minutes, and AM/PM choice for both the clock-in and
+	 * clock-out times.
 	 * 
-	 * If the user leaves a text field blank, a dialog will
-	 * prompt the user about it and default every section of that
-	 * day to 0.
+	 * If the user leaves a text field blank, a dialog will prompt the
+	 * user about it and default every section of that day to 0.
 	 * 
 	 */
 	void setWeekDataArray() {
 		// Sunday
 		try {
-			week.weekData[0][0] = Integer.parseInt(
-					sunInHr.getText());
-			week.weekData[0][1] = Integer.parseInt(
-					sunInMin.getText());
+			week.weekData[0][0] = Integer.parseInt(sunInHr.getText());
+			week.weekData[0][1] = Integer.parseInt(sunInMin.getText());
 
 			if (sunInAMPMBox.getSelectedItem().equals("AM")) {
 				week.weekData[0][2] = 0;
@@ -943,8 +942,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 				week.weekData[0][2] = 1;
 			}
 
-			week.weekData[0][3] = Integer.parseInt(
-					sunOutHr.getText());
+			week.weekData[0][3] = Integer.parseInt(sunOutHr.getText());
 			week.weekData[0][4] =
 					Integer.parseInt(sunOutMin.getText());
 
@@ -956,16 +954,14 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null,
 					"Could not parse Sunday input time!"
-						+ " Please enter a number.");
+							+ " Please enter a number.");
 		}
 
 		// Monday
 		try {
 
-			week.weekData[1][0] = Integer.parseInt(
-					monInHr.getText());
-			week.weekData[1][1] = Integer.parseInt(
-					monInMin.getText());
+			week.weekData[1][0] = Integer.parseInt(monInHr.getText());
+			week.weekData[1][1] = Integer.parseInt(monInMin.getText());
 
 			if (monInAMPMBox.getSelectedItem().equals("AM")) {
 				week.weekData[1][2] = 0;
@@ -973,8 +969,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 				week.weekData[1][2] = 1;
 			}
 
-			week.weekData[1][3] = Integer.parseInt(
-					monOutHr.getText());
+			week.weekData[1][3] = Integer.parseInt(monOutHr.getText());
 			week.weekData[1][4] =
 					Integer.parseInt(monOutMin.getText());
 
@@ -986,14 +981,13 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null,
 					"Could not parse Monday input time!"
-					 + " Please enter a number.");
+							+ " Please enter a number.");
 		}
 
 		// Tuesday
 		try {
 
-			week.weekData[2][0] = Integer.parseInt(
-					tuesInHr.getText());
+			week.weekData[2][0] = Integer.parseInt(tuesInHr.getText());
 			week.weekData[2][1] =
 					Integer.parseInt(tuesInMin.getText());
 
@@ -1016,15 +1010,13 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null,
 					"Could not parse Tuesday input time!"
-						+ " Please enter a number.");
+							+ " Please enter a number.");
 		}
 
 		// Wednesday
 		try {
-			week.weekData[3][0] = Integer.parseInt(
-					wedInHr.getText());
-			week.weekData[3][1] = Integer.parseInt(
-					wedInMin.getText());
+			week.weekData[3][0] = Integer.parseInt(wedInHr.getText());
+			week.weekData[3][1] = Integer.parseInt(wedInMin.getText());
 
 			if (wedInAMPMBox.getSelectedItem().equals("AM")) {
 				week.weekData[3][2] = 0;
@@ -1032,8 +1024,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 				week.weekData[3][2] = 1;
 			}
 
-			week.weekData[3][3] = Integer.parseInt(
-					wedOutHr.getText());
+			week.weekData[3][3] = Integer.parseInt(wedOutHr.getText());
 			week.weekData[3][4] =
 					Integer.parseInt(wedOutMin.getText());
 
@@ -1045,7 +1036,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null,
 					"Could not parse Wednesday input time!"
-						+ " Please enter a number.");
+							+ " Please enter a number.");
 		}
 		// Thursday
 		try {
@@ -1073,15 +1064,13 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null,
 					"Could not parse Thursday input time!"
-						+ " Please enter a number.");
+							+ " Please enter a number.");
 		}
 
 		// Friday
 		try {
-			week.weekData[5][0] = Integer.parseInt(
-					friInHr.getText());
-			week.weekData[5][1] = Integer.parseInt(
-					friInMin.getText());
+			week.weekData[5][0] = Integer.parseInt(friInHr.getText());
+			week.weekData[5][1] = Integer.parseInt(friInMin.getText());
 
 			if (friInAMPMBox.getSelectedItem().equals("AM")) {
 				week.weekData[5][2] = 0;
@@ -1089,8 +1078,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 				week.weekData[5][2] = 1;
 			}
 
-			week.weekData[5][3] = Integer.parseInt(
-					friOutHr.getText());
+			week.weekData[5][3] = Integer.parseInt(friOutHr.getText());
 			week.weekData[5][4] =
 					Integer.parseInt(friOutMin.getText());
 
@@ -1102,15 +1090,13 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null,
 					"Could not parse Friday input time!"
-						+ " Please enter a number.");
+							+ " Please enter a number.");
 		}
 
 		// Saturday
 		try {
-			week.weekData[6][0] = Integer.parseInt(
-					satInHr.getText());
-			week.weekData[6][1] = Integer.parseInt(
-					satInMin.getText());
+			week.weekData[6][0] = Integer.parseInt(satInHr.getText());
+			week.weekData[6][1] = Integer.parseInt(satInMin.getText());
 
 			if (satInAMPMBox.getSelectedItem().equals("AM")) {
 				week.weekData[6][2] = 0;
@@ -1118,8 +1104,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 				week.weekData[6][2] = 1;
 			}
 
-			week.weekData[6][3] = Integer.parseInt(
-					satOutHr.getText());
+			week.weekData[6][3] = Integer.parseInt(satOutHr.getText());
 			week.weekData[6][4] =
 					Integer.parseInt(satOutMin.getText());
 
@@ -1131,22 +1116,22 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null,
 					"Could not parse Saturday input time!"
-						+ " Please enter a number.");
+							+ " Please enter a number.");
 		}
 
 	}
 
 	/**
-	 * Method that updates the total hours worked
-	 * for every day of the week.
+	 * Method that updates the total hours worked for every day of the
+	 * week.
 	 * 
-	 * Contains a switch-case that cycles through every
-	 * day of the week. It will call the calcTime method
-	 * in Clock.java with parameters for that particular day.
+	 * Contains a switch-case that cycles through every day of the
+	 * week. It will call the calcTime method in Clock.java with
+	 * parameters for that particular day.
 	 * 
 	 * After all total hours are calculated. The method updates the
-	 * total hour JLabels for each day so the user may see the
-	 * total calculated hours.
+	 * total hour JLabels for each day so the user may see the total
+	 * calculated hours.
 	 */
 	void updateCalcHrs() {
 		int x = 0;
@@ -1207,11 +1192,9 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		friTotHrs.setText(df.format(fri));
 		satTotHrs.setText(df.format(sat));
 		weekTotHrs.setText(
-				df.format(sun + mon + tues + wed
-						+ thurs + fri + sat));
+				df.format(sun + mon + tues + wed + thurs + fri + sat));
 	}
 
-	
 	/**
 	 * Method that updates the JLabels involving Gross and Net Income.
 	 * 
@@ -1222,50 +1205,53 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 	 * methods in Clock.java to calculate the total amount of capital
 	 * earned for the week.
 	 * 
-	 * After these calculations are made, the method updates the JLabels
-	 * for Gross and Net income so that the user may see how much capital
-	 * they have earned based on the weekly hours and pay rate they have
-	 * entered.
+	 * After these calculations are made, the method updates the
+	 * JLabels for Gross and Net income so that the user may see how
+	 * much capital they have earned based on the weekly hours and pay
+	 * rate they have entered.
 	 */
 	void updatePay() {
-        
-		//Try-Catch block to check that payRate input is correct.
+
+		// Try-Catch block to check that payRate input is correct.
 		try {
-        double testpayRate = Double.parseDouble(getPayRateDollars().getText());
-		
-        if (testpayRate < 0.00) {
-        	JOptionPane.showMessageDialog(null, "Pay Rate must be "
-        			+ "a positive number. Defaulting to $15.00");
-        	
-        	testpayRate = 15.00;
-        	getPayRateDollars().setText("15.00");
-        }
+			double testpayRate =
+					Double.parseDouble(getPayRateDollars().getText());
+
+			if (testpayRate < 0.00) {
+				JOptionPane.showMessageDialog(null, "Pay Rate must be "
+						+ "a positive number. Defaulting to $15.00");
+
+				testpayRate = 15.00;
+				getPayRateDollars().setText("15.00");
+			}
 		} catch (NumberFormatException e) {
-			JOptionPane.showMessageDialog(
-					null, "Pay Rate must be a positive"
-				+ "number. Defaulting pay rate to $15.00");
+			JOptionPane.showMessageDialog(null,
+					"Pay Rate must be a positive"
+							+ "number. Defaulting pay rate to $15.00");
 			getPayRateDollars().setText("15.00");
 		}
-		
-		double payRate = Double.parseDouble(
-				getPayRateDollars().getText());
-		
+
+		double payRate =
+				Double.parseDouble(getPayRateDollars().getText());
+
 		double grossPay = week.calcGrossEarnings(
-        Double.parseDouble(weekTotHrs.getText()), payRate);
-        
-        double netPay = week.calcNetEarnings(grossPay);
-        
-        weekGrossDollars.setText("$" + df.format(grossPay));
-        weekNetPay.setText("$" + df.format(netPay));
-		
-    }
+				Double.parseDouble(weekTotHrs.getText()), payRate);
+
+		double netPay = week.calcNetEarnings(grossPay);
+
+		weekGrossDollars.setText("$" + df.format(grossPay));
+		weekNetPay.setText("$" + df.format(netPay));
+
+	}
 
 	/**
-	 * Performs actions based on any ActionEvent objects
-	 * passed into the method.
+	 * Performs actions based on any ActionEvent objects passed into
+	 * the method.
 	 * 
-	 * @param e ActionEvent that is passed in. i.e JButton clicks.
+	 * @param e
+	 *            ActionEvent that is passed in. i.e JButton clicks.
 	 */
+
 	public void actionPerformed(final ActionEvent e) {
 
 		Object action = e.getSource();
@@ -1274,12 +1260,17 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 			setWeekDataArray();
 			updateCalcHrs();
 			updatePay();
+
+		}
+		if (t == action) {
+			clock.setText(new Date().toString());
 		}
 	}
 
 	/**
-	 * Getter method for payRateDollars JTextfield.
-	 * method is needed for JUnits tests
+	 * Getter method for payRateDollars JTextfield. method is needed
+	 * for JUnits tests
+	 * 
 	 * @return JTextfield for payRateDollars.
 	 */
 	public JTextField getPayRateDollars() {
@@ -1287,10 +1278,11 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * setter method for payRateDollars JTextField.
-	 * method is needed for JUnit tests
+	 * setter method for payRateDollars JTextField. method is needed
+	 * for JUnit tests
 	 * 
-	 * @param payRateDollars JTextField containing a string value.
+	 * @param payRateDollars
+	 *            JTextField containing a string value.
 	 */
 	public void setPayRateDollars(final JTextField payRateDollars) {
 		this.payRateDollars = payRateDollars;
