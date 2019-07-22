@@ -18,24 +18,6 @@ public class Clock {
 	int[][] weekData = new int[7][6];
 
 	/**
-	 * Object that holds the value representing Milliseconds in one
-	 * hour.
-	 */
-	private final int millisInHour = (1000 * 60 * 60);
-
-	/**
-	 * Object that holds the value representing Milliseconds in one
-	 * minute.
-	 */
-	private final int millisInMin = (1000 * 60);
-
-	/**
-	 * Object that holds the value representing Milliseconds in one
-	 * second.
-	 */
-	private final int millisInSec = 1000;
-
-	/**
 	 * Calculates total earnings with the time and rate passed in.
 	 * 
 	 * @param time
@@ -45,11 +27,123 @@ public class Clock {
 	 * @return Product of time and rate that represents total earnings
 	 */
 	// Still need to format the output to 2 decimal places
-	public double calcGrossEarnings(double time, double rate) {
+	public double calcGrossEarnings(final double time,
+			final double rate) {
 		return time * rate;
 	}
 	
-	/*
+	
+
+	/**
+	 * the calcTime method takes in the "clock-in" time, and the
+	 * "clock-out" time in hour, minute, and AM/PM sections. 
+	 * The method takes the difference between the two times
+	 * to calculate the total time worked for the day. How the
+	 * difference is calculated is based on the AM/PM of each
+	 * time to make sure the calculated time difference is within
+	 * the typical 24-hour day time schedule.
+	 * 
+	 * @param time1H Integer of hour clocked-in
+	 * @param time1M Integer of minute clock-in
+	 * @param time1AMPM Integer representing AM or PM.
+	 * 			0 = AM and 1 = PM.
+	 * @param time2H Integer of hour clocked-out
+	 * @param time2M Integer of minute clocked-out
+	 * @param time2AMPM Integer representing AM or PM.
+	 * 			0 = AM and 1 = PM.
+	 * @return Double vale of total time worked
+	 */
+	public double calcTime(int time1H, int time1M, int time1AMPM,
+            int time2H, int time2M, int time2AMPM) {
+        double difference = 0.00;
+
+        double time1 = 0.00;
+        double time2 = 0.00;
+
+      //Error checking for invalid inputs.
+        if (time1H < 1 || time1H > 12 || time1M < 0 
+        		|| time1M > 59 || time2H < 1 
+        		|| time2H > 12 || time2M < 0 || time2M > 59) {
+            return 0.00; 
+        } else { //continue
+        	
+        	
+        	//checking in input time is AM
+        	if (time1AMPM == 0) {
+        		//if input hour is 12 AM
+        		if (time1H == 12) {
+        			time1H = 0; //set to 0 for 24 hour scale.
+        		}
+        	  //input time is in PM	
+        	} else {
+        		
+        		if (time1H >= 1 && time1H <= 11) {
+        			time1H += 12;
+        		}
+        	}
+        	
+        	//checking in output time is AM
+        	if (time2AMPM == 0) {
+        		//if output hour is 12 AM
+        		if (time2H == 12) {
+        			time2H = 0; //set to 0 for 24 hour scale.
+        		}
+        	  //output time is in PM	
+        	} else {
+        		
+        		if (time2H >= 1 && time2H <= 11) {
+        			time2H += 12;
+        		}
+        	}
+        	
+        	
+        	//converting given hours and minutes
+        	//into full time value.
+        	time1 = time1H + (time1M / 60);
+        	time2 = time2H + (time2M / 60);
+        	
+        	
+        	
+        	// AM to AM calculation
+        	if (time1AMPM == 0 && time2AMPM == 0) {
+        		
+        		//checking if out-time is greater
+        		//than in-time
+        		if (time1 > time2) {
+        			difference = 24.0 - Math.abs(time2 - time1);
+        		} else {
+        		difference = Math.abs(time1 - time2);
+        		}
+        	}
+        	
+        	// PM to PM calculation
+        	if (time1AMPM == 1 && time2AMPM == 1) {
+        		
+        		//checking if out-time is greater
+        		//than in-time
+        		if (time1 > time2) {
+        			difference = 24.0 - Math.abs(time2 - time1);
+        		} else {
+        		difference = Math.abs(time1 - time2);
+        		}
+        	}
+        	
+        	//AM to PM calculation
+        	if (time1AMPM == 0 && time2AMPM == 1) {
+        		difference = Math.abs(time2 - time1);
+        	}
+        	
+        	//PM to AM calculation
+        	if (time1AMPM == 1 && time2AMPM == 0) {
+        		
+        		difference = 24.0 - Math.abs(time2 - time1);
+        	}
+        	
+        	return difference;
+        }
+	}
+	
+	/**
 	* Takes the gross pay and applies standard U.S taxes
     * to calculate the net pay.
     *
@@ -72,144 +166,5 @@ public class Clock {
        return netPay;
    }
 
-	public void zeroDataArray() {
-		for (int x = 0; x < 7; x++) {
-			for (int y = 0; y < 6; y++) {
-				weekData[x][y] = 0;
-			}
-		}
-	}
 	
-
-	public double calcTime(int time1H, int time1M, int time1AMPM,
-			int time2H, int time2M, int time2AMPM) {
-		double toReturn = 0;
-
-		double time1 = 0;
-		double time2 = 0;
-
-		if (time1H < 1 || time1H > 12 || time1M < 0 || time1M > 59 || time2H < 1 || time2H > 12 || time2M < 0 || time2M > 59)
-		{
-			return 0.00;
-		}
-		else {
-			if(time1AMPM>time2AMPM) //if it's a PM to AM Shift
-			{
-				time1 = time1H + (time1M / 60.0);
-				time2 = time2H + (time2M / 60.0);
-
-				if (time1AMPM == 1) {
-					time1 += 12;
-				}
-
-				if (time2AMPM == 1) {
-					time2 += 12;
-				}
-
-				toReturn = time2 - time1;
-
-				return toReturn +24; //IMPORTANT, ALLOWS ROLLOVER FOR LATE NIGHT SHIFT
-
-			}
-			else if(time1AMPM==time2AMPM) //if it's an AM to AM or PM to PM Shift
-			{
-				time1 = time1H + (time1M / 60.0);
-				time2 = time2H + (time2M / 60.0);
-
-				if (time1AMPM == 1) {
-					time1 += 12;
-				}
-
-				if (time2AMPM == 1) {
-					time2 += 12;
-				}
-
-				toReturn = time2 - time1;
-
-				if(time1H>time2H) {
-					return toReturn +24; //IMPORTANT
-				}
-				else {
-					return toReturn;
-				}
-
-			}
-
-			else { // if its AMto PM shift
-				time1 = time1H + (time1M / 60.0);
-				time2 = time2H + (time2M / 60.0);
-
-				if (time1AMPM == 1) {
-					time1 += 12;
-				}
-
-				if (time2AMPM == 1) {
-					time2 += 12;
-				}
-
-				toReturn = time2 - time1;
-
-				return toReturn;
-			}
-		}
-	}
-
-	/**
-	 * Calculates total earnings with the time and rate passed in.
-	 * 
-	 * @param time
-	 *            numerical time value in milliseconds
-	 * @param rate
-	 *            numerical value representing dollar earnings per hour
-	 * @return Product of time and rate that represents total earnings
-	 */
-	// Still need to format the output to 2 decimal places
-	public double calcTotalEarnings(double time, double rate) {
-		return time * rate;
-	}
-
-	/**
-	 * Calculates earnings per hour with time and total money earned.
-	 * 
-	 * @param time
-	 *            numerical value representing hours "clocked-in"
-	 * @param money
-	 *            numerical value representing a sum of money
-	 * @return a quotient of money and time that represents earnings
-	 *         made per hour
-	 */
-	// Still need to format the output to 2 decimal places
-	public double calcHourEarnings(double time, double money) {
-		return money / time;
-	}
-
-	/**
-	 * Calculates earnings per minute with time and total money earned.
-	 * 
-	 * @param time
-	 *            numerical value representing time in minutes
-	 * @param money
-	 *            numerical value representing a sum of money
-	 * @return a quotient of money and time that represents earnings
-	 *         made per minute
-	 */
-	// Still need to format the output to 2 decimal places
-	public double calcMinEarnings(double time, double money) {
-		return money / time;
-	}
-
-	/**
-	 * Calculates earnings per second with time and total money earned.
-	 * 
-	 * @param time
-	 *            numerical value representing time in seconds
-	 * @param money
-	 *            numerical value representing a sum of money
-	 * @return a quotient of money and time representing earnings made
-	 *         per second
-	 */
-	// Still need to format the output to 2 decimal places
-	public double calcSecEarnings(double time, double money) {
-		return money / time;
-	}
 }
