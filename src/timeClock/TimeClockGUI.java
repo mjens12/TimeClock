@@ -208,7 +208,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 	/** JLabel for pay rate. **/
 	private JLabel lblPayRate = new JLabel("Pay Rate");
 
-	private JLabel clock = new JLabel("00:00");
+	private JLabel clock = new JLabel(new Date().toString());
 
 	/** JLabel for pay rate per hour. **/
 	private JLabel lblPerHr = new JLabel("Per Hour");
