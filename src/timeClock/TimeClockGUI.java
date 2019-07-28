@@ -11,8 +11,12 @@ import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -47,6 +51,12 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 
 	/** JPanel to hold the GUI contents. **/
 	private JPanel contentPane;
+
+	private JMenuBar menus = new JMenuBar();
+	private JMenu mainMenu = new JMenu("Main Menu");
+	private JMenuItem exportItem = new JMenuItem("Export As Text");
+	private JMenuItem importItem = new JMenuItem("Import From Text");
+	private JMenuItem resetItem = new JMenuItem("Reset All Fields");
 
 	/**
 	 * JTextField for user to enter in Wednesday clock-in hour.
@@ -360,6 +370,14 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+
+		mainMenu.add(exportItem);
+		mainMenu.add(importItem);
+		mainMenu.add(resetItem);
+
+		menus.add(mainMenu);
+
+		setJMenuBar(menus);
 
 		JLabel lblPunchClock =
 				new JLabel("Punch Clock & Wage Calculator");
@@ -917,6 +935,9 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(weekNetPay);
 
 		enterButton.addActionListener(this);
+		exportItem.addActionListener(this);
+		importItem.addActionListener(this);
+		resetItem.addActionListener(this);
 	}
 
 	/**
@@ -1133,7 +1154,8 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 	 * total hour JLabels for each day so the user may see the total
 	 * calculated hours.
 	 */
-	void updateCalcHrs() {
+	public void updateCalcHrs() {
+
 		int x = 0;
 		double sun = 0;
 		double mon = 0;
@@ -1193,6 +1215,16 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		satTotHrs.setText(df.format(sat));
 		weekTotHrs.setText(
 				df.format(sun + mon + tues + wed + thurs + fri + sat));
+
+		week.timeWorked[0] = sun;
+		week.timeWorked[1] = mon;
+		week.timeWorked[2] = tues;
+		week.timeWorked[3] = wed;
+		week.timeWorked[4] = thurs;
+		week.timeWorked[5] = fri;
+		week.timeWorked[6] = sat;
+		week.totHrsWorked =
+				(sun + mon + tues + wed + thurs + fri + sat);
 	}
 
 	/**
@@ -1262,9 +1294,26 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 			updatePay();
 
 		}
+
+		if (exportItem == action) {
+			JFileChooser chooser = new JFileChooser();
+			int status = chooser.showSaveDialog(null);
+			if (status == JFileChooser.APPROVE_OPTION) {
+				String filename =
+						chooser.getSelectedFile().getAbsolutePath();
+				if (exportItem == e.getSource())
+					week.textOut(filename);
+			}
+
+		}
+
+		// if (resetItem == action)
+		// clock.resetWeek();
+
 		if (t == action) {
 			clock.setText(new Date().toString());
 		}
+
 	}
 
 	/**
