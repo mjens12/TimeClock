@@ -1,28 +1,27 @@
-package timeClock;
+package vers1dot2;
 
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.text.DecimalFormat;
 import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JCheckBox;
 
 /**
  * This is the front end of the Time Clock software. All JComponents
@@ -51,12 +50,6 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 
 	/** JPanel to hold the GUI contents. **/
 	private JPanel contentPane;
-
-	private JMenuBar menus = new JMenuBar();
-	private JMenu mainMenu = new JMenu("Main Menu");
-	private JMenuItem exportItem = new JMenuItem("Export As Text");
-	private JMenuItem importItem = new JMenuItem("Import From Text");
-	private JMenuItem resetItem = new JMenuItem("Reset All Fields");
 
 	/**
 	 * JTextField for user to enter in Wednesday clock-in hour.
@@ -218,8 +211,6 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 	/** JLabel for pay rate. **/
 	private JLabel lblPayRate = new JLabel("Pay Rate");
 
-	private JLabel clock = new JLabel(new Date().toString());
-
 	/** JLabel for pay rate per hour. **/
 	private JLabel lblPerHr = new JLabel("Per Hour");
 
@@ -333,6 +324,9 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 
 	/** Clock object for money and time calculations. **/
 	private Clock week = new Clock();
+	
+	/** JCheckBox to enable/disable overtime **/
+	private final JCheckBox overtimeCheckBox = new JCheckBox("");
 
 	/**
 	 * Main method that launches the GUI.
@@ -370,14 +364,6 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		mainMenu.add(exportItem);
-		mainMenu.add(importItem);
-		mainMenu.add(resetItem);
-
-		menus.add(mainMenu);
-
-		setJMenuBar(menus);
 
 		JLabel lblPunchClock =
 				new JLabel("Punch Clock & Wage Calculator");
@@ -626,7 +612,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		contentPane.add(satInAMPMBox);
 
 		enterButton.setFont(new Font("Tahoma", Font.BOLD, 15));
-		enterButton.setBounds(382, 600, 100, 50);
+		enterButton.setBounds(581, 890, 100, 50);
 		contentPane.add(enterButton);
 
 		JLabel lblHrOut = new JLabel("Hr");
@@ -840,10 +826,6 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		lblPayRate.setBounds(48, 623, 98, 25);
 		contentPane.add(lblPayRate);
 
-		clock.setFont(new Font("Tahoma", Font.BOLD, 20));
-		clock.setBounds(48, 675, 500, 25);
-		contentPane.add(clock);
-
 		setPayRateDollars(new JTextField());
 		getPayRateDollars().setText("10.00");
 		getPayRateDollars().setToolTipText("");
@@ -933,11 +915,295 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		weekNetPay.setOpaque(true);
 		weekNetPay.setBounds(738, 825, 99, 27);
 		contentPane.add(weekNetPay);
+		
+		JLabel lblOvertime = new JLabel("Overtime");
+		lblOvertime.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblOvertime.setBounds(412, 621, 99, 29);
+		contentPane.add(lblOvertime);
+		
+		overtimeCheckBox.setBackground(new Color(135, 206, 250));
+		overtimeCheckBox.setBounds(382, 617, 25, 40);
+		contentPane.add(overtimeCheckBox);
+		overtimeCheckBox.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent i) {
+				if (i.getStateChange() == ItemEvent.SELECTED) {
+					week.setOT(true);
+				} else {
+					week.setOT(false);
+				}
+				
+			}
+			
+		});
+		JCheckBox sunCheckBox = new JCheckBox("");
+		sunCheckBox.setSelected(true);
+		sunCheckBox.setBackground(new Color(135, 206, 250));
+		sunCheckBox.setBounds(8, 257, 32, 37);
+		contentPane.add(sunCheckBox);
+		sunCheckBox.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(final ItemEvent i) {
+				
+				if (i.getStateChange() == ItemEvent.DESELECTED) {
+					
+					sunInHr.setText("0");
+					sunInMin.setText("00");
+					sunOutHr.setText("0");
+					sunOutMin.setText("00");
+					sunTotHrs.setText("0.00");
+					sunInHr.setEnabled(false);
+					sunInMin.setEnabled(false);
+					sunInAMPMBox.setEnabled(false);
+					sunOutHr.setEnabled(false);
+					sunOutMin.setEnabled(false);
+					sunOutAMPMBox.setEnabled(false);
+					sunTotHrs.setEnabled(false);
+				} else {
+					sunInHr.setEnabled(true);
+					sunInMin.setEnabled(true);
+					sunOutHr.setEnabled(true);
+					sunOutMin.setEnabled(true);
+					sunInAMPMBox.setEnabled(true);
+					sunOutAMPMBox.setEnabled(true);
+					sunTotHrs.setEnabled(true);
+				}
+				
+			}
+			
+		});
+		
+		JCheckBox monCheckBox = new JCheckBox("");
+		monCheckBox.setSelected(true);
+		monCheckBox.setBackground(new Color(135, 206, 250));
+		monCheckBox.setBounds(8, 312, 32, 37);
+		contentPane.add(monCheckBox);
+		monCheckBox.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(final ItemEvent i) {
+				
+				if (i.getStateChange() == ItemEvent.DESELECTED) {
+					
+					monInHr.setText("0");
+					monInMin.setText("00");
+					monOutHr.setText("0");
+					monOutMin.setText("00");
+					monTotHrs.setText("0.00");
+					monInHr.setEnabled(false);
+					monInMin.setEnabled(false);
+					monInAMPMBox.setEnabled(false);
+					monOutHr.setEnabled(false);
+					monOutMin.setEnabled(false);
+					monOutAMPMBox.setEnabled(false);
+					monTotHrs.setEnabled(false);
+				} else {
+					monInHr.setEnabled(true);
+					monInMin.setEnabled(true);
+					monOutHr.setEnabled(true);
+					monOutMin.setEnabled(true);
+					monInAMPMBox.setEnabled(true);
+					monOutAMPMBox.setEnabled(true);
+					monTotHrs.setEnabled(true);
+				}
+				
+			}
+			
+		});
+		
+		JCheckBox tuesCheckBox = new JCheckBox("");
+		tuesCheckBox.setSelected(true);
+		tuesCheckBox.setBackground(new Color(135, 206, 250));
+		tuesCheckBox.setBounds(8, 362, 32, 37);
+		contentPane.add(tuesCheckBox);
+		tuesCheckBox.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(final ItemEvent i) {
+				
+				if (i.getStateChange() == ItemEvent.DESELECTED) {
+					
+					tuesInHr.setText("0");
+					tuesInMin.setText("00");
+					tuesOutHr.setText("0");
+					tuesOutMin.setText("00");
+					tuesTotHrs.setText("0.00");
+					tuesInHr.setEnabled(false);
+					tuesInMin.setEnabled(false);
+					tuesInAMPMBox.setEnabled(false);
+					tuesOutHr.setEnabled(false);
+					tuesOutMin.setEnabled(false);
+					tuesOutAMPMBox.setEnabled(false);
+					tuesTotHrs.setEnabled(false);
+				} else {
+					tuesInHr.setEnabled(true);
+					tuesInMin.setEnabled(true);
+					tuesOutHr.setEnabled(true);
+					tuesOutMin.setEnabled(true);
+					tuesInAMPMBox.setEnabled(true);
+					tuesOutAMPMBox.setEnabled(true);
+					tuesTotHrs.setEnabled(true);
+				}
+				
+			}
+			
+		});
+		
+		JCheckBox wedCheckBox = new JCheckBox("");
+		wedCheckBox.setSelected(true);
+		wedCheckBox.setBackground(new Color(135, 206, 250));
+		wedCheckBox.setBounds(8, 412, 32, 37);
+		contentPane.add(wedCheckBox);
+		wedCheckBox.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(final ItemEvent i) {
+				
+				if (i.getStateChange() == ItemEvent.DESELECTED) {
+					
+					wedInHr.setText("0");
+					wedInMin.setText("00");
+					wedOutHr.setText("0");
+					wedOutMin.setText("00");
+					wedTotHrs.setText("0.00");
+					wedInHr.setEnabled(false);
+					wedInMin.setEnabled(false);
+					wedInAMPMBox.setEnabled(false);
+					wedOutHr.setEnabled(false);
+					wedOutMin.setEnabled(false);
+					wedOutAMPMBox.setEnabled(false);
+					wedTotHrs.setEnabled(false);
+				} else {
+					wedInHr.setEnabled(true);
+					wedInMin.setEnabled(true);
+					wedOutHr.setEnabled(true);
+					wedOutMin.setEnabled(true);
+					wedInAMPMBox.setEnabled(true);
+					wedOutAMPMBox.setEnabled(true);
+					wedTotHrs.setEnabled(true);
+				}
+				
+			}
+			
+		});
+		
+		JCheckBox thursCheckBox = new JCheckBox("");
+		thursCheckBox.setSelected(true);
+		thursCheckBox.setBackground(new Color(135, 206, 250));
+		thursCheckBox.setBounds(8, 462, 32, 37);
+		contentPane.add(thursCheckBox);
+		thursCheckBox.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(final ItemEvent i) {
+				
+				if (i.getStateChange() == ItemEvent.DESELECTED) {
+					
+					thursInHr.setText("0");
+					thusInMin.setText("00");
+					thursOutHr.setText("0");
+					thursOutMin.setText("00");
+					thusTotHrs.setText("0.00");
+					thursInHr.setEnabled(false);
+					thusInMin.setEnabled(false);
+					thursInAMPMBox.setEnabled(false);
+					thursOutHr.setEnabled(false);
+					thursOutMin.setEnabled(false);
+					thursOutAMPMBox.setEnabled(false);
+					thusTotHrs.setEnabled(false);
+				} else {
+					thursInHr.setEnabled(true);
+					thusInMin.setEnabled(true);
+					thursOutHr.setEnabled(true);
+					thursOutMin.setEnabled(true);
+					thursInAMPMBox.setEnabled(true);
+					thursOutAMPMBox.setEnabled(true);
+					thusTotHrs.setEnabled(true);
+				}
+				
+			}
+			
+		});
+		
+		JCheckBox friCheckBox = new JCheckBox("");
+		friCheckBox.setSelected(true);
+		friCheckBox.setBackground(new Color(135, 206, 250));
+		friCheckBox.setBounds(8, 512, 25, 37);
+		contentPane.add(friCheckBox);
+		friCheckBox.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(final ItemEvent i) {
+				
+				if (i.getStateChange() == ItemEvent.DESELECTED) {
+					
+					friInHr.setText("0");
+					friInMin.setText("00");
+					friOutHr.setText("0");
+					friOutMin.setText("00");
+					friTotHrs.setText("0.00");
+					friInHr.setEnabled(false);
+					friInMin.setEnabled(false);
+					friInAMPMBox.setEnabled(false);
+					friOutHr.setEnabled(false);
+					friOutMin.setEnabled(false);
+					friOutAMPMBox.setEnabled(false);
+					friTotHrs.setEnabled(false);
+				} else {
+					friInHr.setEnabled(true);
+					friInMin.setEnabled(true);
+					friOutHr.setEnabled(true);
+					friOutMin.setEnabled(true);
+					friInAMPMBox.setEnabled(true);
+					friOutAMPMBox.setEnabled(true);
+					friTotHrs.setEnabled(true);
+				}
+				
+			}
+			
+		});
+		
+		JCheckBox satCheckBox = new JCheckBox("");
+		satCheckBox.setSelected(true);
+		satCheckBox.setBackground(new Color(135, 206, 250));
+		satCheckBox.setBounds(8, 558, 32, 37);
+		contentPane.add(satCheckBox);
+		satCheckBox.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(final ItemEvent i) {
+				
+				if (i.getStateChange() == ItemEvent.DESELECTED) {
+					
+					satInHr.setText("0");
+					satInMin.setText("00");
+					satOutHr.setText("0");
+					satOutMin.setText("00");
+					satTotHrs.setText("0.00");
+					satInHr.setEnabled(false);
+					satInMin.setEnabled(false);
+					satInAMPMBox.setEnabled(false);
+					satOutHr.setEnabled(false);
+					satOutMin.setEnabled(false);
+					satOutAMPMBox.setEnabled(false);
+					satTotHrs.setEnabled(false);
+				} else {
+					satInHr.setEnabled(true);
+					satInMin.setEnabled(true);
+					satOutHr.setEnabled(true);
+					satOutMin.setEnabled(true);
+					satInAMPMBox.setEnabled(true);
+					satOutAMPMBox.setEnabled(true);
+					satTotHrs.setEnabled(true);
+				}
+				
+			}
+			
+		});
 
 		enterButton.addActionListener(this);
-		exportItem.addActionListener(this);
-		importItem.addActionListener(this);
-		resetItem.addActionListener(this);
 	}
 
 	/**
@@ -1154,8 +1420,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 	 * total hour JLabels for each day so the user may see the total
 	 * calculated hours.
 	 */
-	public void updateCalcHrs() {
-
+	void updateCalcHrs() {
 		int x = 0;
 		double sun = 0;
 		double mon = 0;
@@ -1215,16 +1480,6 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		satTotHrs.setText(df.format(sat));
 		weekTotHrs.setText(
 				df.format(sun + mon + tues + wed + thurs + fri + sat));
-
-		week.timeWorked[0] = sun;
-		week.timeWorked[1] = mon;
-		week.timeWorked[2] = tues;
-		week.timeWorked[3] = wed;
-		week.timeWorked[4] = thurs;
-		week.timeWorked[5] = fri;
-		week.timeWorked[6] = sat;
-		week.totHrsWorked =
-				(sun + mon + tues + wed + thurs + fri + sat);
 	}
 
 	/**
@@ -1294,26 +1549,6 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 			updatePay();
 
 		}
-
-		if (exportItem == action) {
-			JFileChooser chooser = new JFileChooser();
-			int status = chooser.showSaveDialog(null);
-			if (status == JFileChooser.APPROVE_OPTION) {
-				String filename =
-						chooser.getSelectedFile().getAbsolutePath();
-				if (exportItem == e.getSource())
-					week.textOut(filename);
-			}
-
-		}
-
-		// if (resetItem == action)
-		// clock.resetWeek();
-
-		if (t == action) {
-			clock.setText(new Date().toString());
-		}
-
 	}
 
 	/**
