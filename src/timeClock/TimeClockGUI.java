@@ -1,16 +1,17 @@
 package timeClock;
 
-
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.text.DecimalFormat;
-import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -22,7 +23,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 
 /**
@@ -328,14 +328,15 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 
 	/** Clock object for money and time calculations. **/
 	private Clock week = new Clock();
-    private JTextField federalBox;
-    private JTextField socialBox;
-    private JTextField medicareBox;
-    private JTextField stateBox;
-    private final JLabel lblMedicareTax = new JLabel("Medicare Tax");
-    private final JLabel lblStateTax_1 = new JLabel("State Tax");
-    private final JLabel lblSocialSecurityTax = new JLabel("Social Security Tax");
-    private final JLabel lblFederalTax = new JLabel("Federal Tax");
+	private JTextField federalBox;
+	private JTextField socialBox;
+	private JTextField medicareBox;
+	private JTextField stateBox;
+	private final JLabel lblMedicareTax = new JLabel("Medicare Tax");
+	private final JLabel lblStateTax_1 = new JLabel("State Tax");
+	private final JLabel lblSocialSecurityTax =
+			new JLabel("Social Security Tax");
+	private final JLabel lblFederalTax = new JLabel("Federal Tax");
 
 	/**
 	 * Main method that launches the GUI.
@@ -934,50 +935,317 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		exportItem.addActionListener(this);
 		importItem.addActionListener(this);
 		resetItem.addActionListener(this);
-		
+
 		federalBox = new JTextField();
-        federalBox.setFont(new Font("Tahoma", Font.BOLD, 20));
-        federalBox.setText("11");
-        federalBox.setBounds(182, 695, 99, 27);
-        contentPane.add(federalBox);
-        federalBox.setColumns(10);
-        
-        socialBox = new JTextField();
-        socialBox.setText("6.2");
-        socialBox.setFont(new Font("Tahoma", Font.BOLD, 20));
-        socialBox.setBounds(252, 732, 99, 27);
-        contentPane.add(socialBox);
-        socialBox.setColumns(10);
-        
-        medicareBox = new JTextField();
-        medicareBox.setText("1.45");
-        medicareBox.setFont(new Font("Tahoma", Font.BOLD, 20));
-        medicareBox.setBounds(199, 765, 99, 27);
-        contentPane.add(medicareBox);
-        medicareBox.setColumns(10);
-        
-        stateBox= new JTextField();
-        stateBox.setText("N/A");
-        stateBox.setFont(new Font("Tahoma", Font.BOLD, 20));
-        stateBox.setBounds(160, 802, 99, 27);
-        contentPane.add(stateBox);
-        stateBox.setColumns(10);
-        lblMedicareTax.setFont(new Font("Tahoma", Font.BOLD, 20));
-        lblMedicareTax.setBounds(48, 766, 174, 25);
-        
-        contentPane.add(lblMedicareTax);
-        lblStateTax_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-        lblStateTax_1.setBounds(48, 800, 174, 25);
-        
-        contentPane.add(lblStateTax_1);
-        lblSocialSecurityTax.setFont(new Font("Tahoma", Font.BOLD, 20));
-        lblSocialSecurityTax.setBounds(48, 733, 194, 25);
-        
-        contentPane.add(lblSocialSecurityTax);
-        lblFederalTax.setFont(new Font("Tahoma", Font.BOLD, 20));
-        lblFederalTax.setBounds(47, 697, 194, 25);
-        
-        contentPane.add(lblFederalTax);
+		federalBox.setFont(new Font("Tahoma", Font.BOLD, 20));
+		federalBox.setText("11");
+		federalBox.setBounds(182, 695, 99, 27);
+		contentPane.add(federalBox);
+		federalBox.setColumns(10);
+
+		socialBox = new JTextField();
+		socialBox.setText("6.2");
+		socialBox.setFont(new Font("Tahoma", Font.BOLD, 20));
+		socialBox.setBounds(252, 732, 99, 27);
+		contentPane.add(socialBox);
+		socialBox.setColumns(10);
+
+		medicareBox = new JTextField();
+		medicareBox.setText("1.45");
+		medicareBox.setFont(new Font("Tahoma", Font.BOLD, 20));
+		medicareBox.setBounds(199, 765, 99, 27);
+		contentPane.add(medicareBox);
+		medicareBox.setColumns(10);
+
+		stateBox = new JTextField();
+		stateBox.setText("N/A");
+		stateBox.setFont(new Font("Tahoma", Font.BOLD, 20));
+		stateBox.setBounds(160, 802, 99, 27);
+		contentPane.add(stateBox);
+		stateBox.setColumns(10);
+		lblMedicareTax.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblMedicareTax.setBounds(48, 766, 174, 25);
+
+		contentPane.add(lblMedicareTax);
+		lblStateTax_1.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblStateTax_1.setBounds(48, 800, 174, 25);
+
+		contentPane.add(lblStateTax_1);
+		lblSocialSecurityTax
+				.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblSocialSecurityTax.setBounds(48, 733, 194, 25);
+
+		contentPane.add(lblSocialSecurityTax);
+		lblFederalTax.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblFederalTax.setBounds(47, 697, 194, 25);
+
+		contentPane.add(lblFederalTax);
+
+		JCheckBox sunCheckBox = new JCheckBox("");
+		sunCheckBox.setSelected(true);
+		sunCheckBox.setBackground(new Color(135, 206, 250));
+		sunCheckBox.setBounds(8, 257, 32, 37);
+		contentPane.add(sunCheckBox);
+		sunCheckBox.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(final ItemEvent i) {
+
+				if (i.getStateChange() == ItemEvent.DESELECTED) {
+
+					sunInHr.setText("0");
+					sunInMin.setText("00");
+					sunOutHr.setText("0");
+					sunOutMin.setText("00");
+					sunTotHrs.setText("0.00");
+					sunInHr.setEnabled(false);
+					sunInMin.setEnabled(false);
+					sunInAMPMBox.setEnabled(false);
+					sunOutHr.setEnabled(false);
+					sunOutMin.setEnabled(false);
+					sunOutAMPMBox.setEnabled(false);
+					sunTotHrs.setEnabled(false);
+				} else {
+					sunInHr.setEnabled(true);
+					sunInMin.setEnabled(true);
+					sunOutHr.setEnabled(true);
+					sunOutMin.setEnabled(true);
+					sunInAMPMBox.setEnabled(true);
+					sunOutAMPMBox.setEnabled(true);
+					sunTotHrs.setEnabled(true);
+				}
+
+			}
+
+		});
+
+		JCheckBox monCheckBox = new JCheckBox("");
+		monCheckBox.setSelected(true);
+		monCheckBox.setBackground(new Color(135, 206, 250));
+		monCheckBox.setBounds(8, 312, 32, 37);
+		contentPane.add(monCheckBox);
+		monCheckBox.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(final ItemEvent i) {
+
+				if (i.getStateChange() == ItemEvent.DESELECTED) {
+
+					monInHr.setText("0");
+					monInMin.setText("00");
+					monOutHr.setText("0");
+					monOutMin.setText("00");
+					monTotHrs.setText("0.00");
+					monInHr.setEnabled(false);
+					monInMin.setEnabled(false);
+					monInAMPMBox.setEnabled(false);
+					monOutHr.setEnabled(false);
+					monOutMin.setEnabled(false);
+					monOutAMPMBox.setEnabled(false);
+					monTotHrs.setEnabled(false);
+				} else {
+					monInHr.setEnabled(true);
+					monInMin.setEnabled(true);
+					monOutHr.setEnabled(true);
+					monOutMin.setEnabled(true);
+					monInAMPMBox.setEnabled(true);
+					monOutAMPMBox.setEnabled(true);
+					monTotHrs.setEnabled(true);
+				}
+
+			}
+
+		});
+
+		JCheckBox tuesCheckBox = new JCheckBox("");
+		tuesCheckBox.setSelected(true);
+		tuesCheckBox.setBackground(new Color(135, 206, 250));
+		tuesCheckBox.setBounds(8, 362, 32, 37);
+		contentPane.add(tuesCheckBox);
+		tuesCheckBox.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(final ItemEvent i) {
+
+				if (i.getStateChange() == ItemEvent.DESELECTED) {
+
+					tuesInHr.setText("0");
+					tuesInMin.setText("00");
+					tuesOutHr.setText("0");
+					tuesOutMin.setText("00");
+					tuesTotHrs.setText("0.00");
+					tuesInHr.setEnabled(false);
+					tuesInMin.setEnabled(false);
+					tuesInAMPMBox.setEnabled(false);
+					tuesOutHr.setEnabled(false);
+					tuesOutMin.setEnabled(false);
+					tuesOutAMPMBox.setEnabled(false);
+					tuesTotHrs.setEnabled(false);
+				} else {
+					tuesInHr.setEnabled(true);
+					tuesInMin.setEnabled(true);
+					tuesOutHr.setEnabled(true);
+					tuesOutMin.setEnabled(true);
+					tuesInAMPMBox.setEnabled(true);
+					tuesOutAMPMBox.setEnabled(true);
+					tuesTotHrs.setEnabled(true);
+				}
+
+			}
+
+		});
+
+		JCheckBox wedCheckBox = new JCheckBox("");
+		wedCheckBox.setSelected(true);
+		wedCheckBox.setBackground(new Color(135, 206, 250));
+		wedCheckBox.setBounds(8, 412, 32, 37);
+		contentPane.add(wedCheckBox);
+		wedCheckBox.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(final ItemEvent i) {
+
+				if (i.getStateChange() == ItemEvent.DESELECTED) {
+
+					wedInHr.setText("0");
+					wedInMin.setText("00");
+					wedOutHr.setText("0");
+					wedOutMin.setText("00");
+					wedTotHrs.setText("0.00");
+					wedInHr.setEnabled(false);
+					wedInMin.setEnabled(false);
+					wedInAMPMBox.setEnabled(false);
+					wedOutHr.setEnabled(false);
+					wedOutMin.setEnabled(false);
+					wedOutAMPMBox.setEnabled(false);
+					wedTotHrs.setEnabled(false);
+				} else {
+					wedInHr.setEnabled(true);
+					wedInMin.setEnabled(true);
+					wedOutHr.setEnabled(true);
+					wedOutMin.setEnabled(true);
+					wedInAMPMBox.setEnabled(true);
+					wedOutAMPMBox.setEnabled(true);
+					wedTotHrs.setEnabled(true);
+				}
+
+			}
+
+		});
+
+		JCheckBox thursCheckBox = new JCheckBox("");
+		thursCheckBox.setSelected(true);
+		thursCheckBox.setBackground(new Color(135, 206, 250));
+		thursCheckBox.setBounds(8, 462, 32, 37);
+		contentPane.add(thursCheckBox);
+		thursCheckBox.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(final ItemEvent i) {
+
+				if (i.getStateChange() == ItemEvent.DESELECTED) {
+
+					thursInHr.setText("0");
+					thusInMin.setText("00");
+					thursOutHr.setText("0");
+					thursOutMin.setText("00");
+					thusTotHrs.setText("0.00");
+					thursInHr.setEnabled(false);
+					thusInMin.setEnabled(false);
+					thursInAMPMBox.setEnabled(false);
+					thursOutHr.setEnabled(false);
+					thursOutMin.setEnabled(false);
+					thursOutAMPMBox.setEnabled(false);
+					thusTotHrs.setEnabled(false);
+				} else {
+					thursInHr.setEnabled(true);
+					thusInMin.setEnabled(true);
+					thursOutHr.setEnabled(true);
+					thursOutMin.setEnabled(true);
+					thursInAMPMBox.setEnabled(true);
+					thursOutAMPMBox.setEnabled(true);
+					thusTotHrs.setEnabled(true);
+				}
+
+			}
+
+		});
+
+		JCheckBox friCheckBox = new JCheckBox("");
+		friCheckBox.setSelected(true);
+		friCheckBox.setBackground(new Color(135, 206, 250));
+		friCheckBox.setBounds(8, 512, 25, 37);
+		contentPane.add(friCheckBox);
+		friCheckBox.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(final ItemEvent i) {
+
+				if (i.getStateChange() == ItemEvent.DESELECTED) {
+
+					friInHr.setText("0");
+					friInMin.setText("00");
+					friOutHr.setText("0");
+					friOutMin.setText("00");
+					friTotHrs.setText("0.00");
+					friInHr.setEnabled(false);
+					friInMin.setEnabled(false);
+					friInAMPMBox.setEnabled(false);
+					friOutHr.setEnabled(false);
+					friOutMin.setEnabled(false);
+					friOutAMPMBox.setEnabled(false);
+					friTotHrs.setEnabled(false);
+				} else {
+					friInHr.setEnabled(true);
+					friInMin.setEnabled(true);
+					friOutHr.setEnabled(true);
+					friOutMin.setEnabled(true);
+					friInAMPMBox.setEnabled(true);
+					friOutAMPMBox.setEnabled(true);
+					friTotHrs.setEnabled(true);
+				}
+
+			}
+
+		});
+
+		JCheckBox satCheckBox = new JCheckBox("");
+		satCheckBox.setSelected(true);
+		satCheckBox.setBackground(new Color(135, 206, 250));
+		satCheckBox.setBounds(8, 558, 32, 37);
+		contentPane.add(satCheckBox);
+		satCheckBox.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(final ItemEvent i) {
+
+				if (i.getStateChange() == ItemEvent.DESELECTED) {
+
+					satInHr.setText("0");
+					satInMin.setText("00");
+					satOutHr.setText("0");
+					satOutMin.setText("00");
+					satTotHrs.setText("0.00");
+					satInHr.setEnabled(false);
+					satInMin.setEnabled(false);
+					satInAMPMBox.setEnabled(false);
+					satOutHr.setEnabled(false);
+					satOutMin.setEnabled(false);
+					satOutAMPMBox.setEnabled(false);
+					satTotHrs.setEnabled(false);
+				} else {
+					satInHr.setEnabled(true);
+					satInMin.setEnabled(true);
+					satOutHr.setEnabled(true);
+					satOutMin.setEnabled(true);
+					satInAMPMBox.setEnabled(true);
+					satOutAMPMBox.setEnabled(true);
+					satTotHrs.setEnabled(true);
+				}
+
+			}
+
+		});
 	}
 
 	/**
@@ -1348,7 +1616,7 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		}
 
 		if (resetItem == action)
-		week.resetWeek();
+			week.resetWeek();
 	}
 
 	/**
