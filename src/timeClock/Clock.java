@@ -15,12 +15,22 @@ import java.text.DecimalFormat;
  */
 public class Clock {
 
+	private static DecimalFormat df = new DecimalFormat("0.00");
+
 	/**
 	 * Array that holds the in and out times for each day of the week,
 	 * the AM/PM settings of the time, and the total hours worked per
 	 * day.
 	 */
 	int[][] weekData = new int[7][6];
+
+	double[] timeWorked = new double[7];
+
+	double payRate = 0.0;
+	double grossIncome = 0.0;
+	double netIncome = 0.0;
+	double totHrsWorked = 0.0;
+	
 	boolean overtime = false;
 	
 	public void setOT(boolean state) {
@@ -50,26 +60,27 @@ public class Clock {
 		
 		return time * rate;
 	}
-	
-	
 
 	/**
 	 * the calcTime method takes in the "clock-in" time, and the
-	 * "clock-out" time in hour, minute, and AM/PM sections. 
-	 * The method takes the difference between the two times
-	 * to calculate the total time worked for the day. How the
-	 * difference is calculated is based on the AM/PM of each
-	 * time to make sure the calculated time difference is within
-	 * the typical 24-hour day time schedule.
+	 * "clock-out" time in hour, minute, and AM/PM sections. The method
+	 * takes the difference between the two times to calculate the
+	 * total time worked for the day. How the difference is calculated
+	 * is based on the AM/PM of each time to make sure the calculated
+	 * time difference is within the typical 24-hour day time schedule.
 	 * 
-	 * @param time1H Integer of hour clocked-in
-	 * @param time1M Integer of minute clock-in
-	 * @param time1AMPM Integer representing AM or PM.
-	 * 			0 = AM and 1 = PM.
-	 * @param time2H Integer of hour clocked-out
-	 * @param time2M Integer of minute clocked-out
-	 * @param time2AMPM Integer representing AM or PM.
-	 * 			0 = AM and 1 = PM.
+	 * @param time1H
+	 *            Integer of hour clocked-in
+	 * @param time1M
+	 *            Integer of minute clock-in
+	 * @param time1AMPM
+	 *            Integer representing AM or PM. 0 = AM and 1 = PM.
+	 * @param time2H
+	 *            Integer of hour clocked-out
+	 * @param time2M
+	 *            Integer of minute clocked-out
+	 * @param time2AMPM
+	 *            Integer representing AM or PM. 0 = AM and 1 = PM.
 	 * @return Double vale of total time worked
 	 */
 	public double calcTime(int time1H, int time1M, int time1AMPM,
@@ -161,38 +172,241 @@ public class Clock {
         	return difference;
         }
 	}
-	
+
 	/**
-	* Takes the gross pay and applies standard U.S taxes
-    * to calculate the net pay.
-    *
-    * @param grossPay double value of total dollars
-    * @return double value of net pay
-    */
-   public double calcNetEarnings(final double grossPay) {
-       
-       final double fedIncomeTax = 0.11;
-       final double socSecurityTax = 0.06;
-       final double medicareTax = 0.0145;
-       
-       final double fedTakeOut = grossPay * fedIncomeTax;
-       final double socTakeOut = grossPay * socSecurityTax;
-       final double medTakeOut = grossPay * medicareTax;
-       
-       double netPay = grossPay - fedTakeOut
-               - socTakeOut - medTakeOut;
-       
-       return netPay;
-   }
-   
-   public void resetWeek() {
-	   
-	   for (int i = 0; i < 7; i++) {
-		   for (int j = 0; j < 6; j++) {
-			   weekData[i][j] = 0;
+	 * Takes the gross pay and applies standard U.S taxes to calculate
+	 * the net pay.
+	 *
+	 * @param grossPay
+	 *            double value of total dollars
+	 * @return double value of net pay
+	 */
+	 public double calcNetEarnings(final double grossPay) {
+	       
+	       final double fedIncomeTax = 0.11;
+	       final double socSecurityTax = 0.06;
+	       final double medicareTax = 0.0145;
+	       
+	       final double fedTakeOut = grossPay * fedIncomeTax;
+	       final double socTakeOut = grossPay * socSecurityTax;
+	       final double medTakeOut = grossPay * medicareTax;
+	       
+	       double netPay = grossPay - fedTakeOut
+	               - socTakeOut - medTakeOut;
+	       
+	       return netPay;
+	   }
+	 
+	   public void resetWeek() {
+		   
+		   for (int i = 0; i < 7; i++) {
+			   for (int j = 0; j < 6; j++) {
+				   weekData[i][j] = 0;
+			   }
 		   }
 	   }
-   }
 
-	
+	public void textOut(String filename) {
+		PrintWriter out = null;
+		try {
+			out = new PrintWriter(
+					new BufferedWriter(new FileWriter(filename)));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// Runs through the list, printing game or dvd first for each
+		// element in the list based on its class, then prints its
+		// information on new lines
+		for (int x = 0; x < 7; x++) {
+			switch (x) {
+			case 0:
+				out.print("Sunday| In Time: ");
+				out.print(weekData[x][0]);
+				out.print(":");
+				out.print(weekData[x][1]);
+				if (weekData[x][1] == 0)
+					out.print("0");
+				if (weekData[x][2] == 0)
+					out.print(" AM ");
+				else
+					out.print(" PM ");
+				out.print("Out Time: ");
+				out.print(weekData[x][3]);
+				out.print(":");
+				out.print(weekData[x][4]);
+				if (weekData[x][4] == 0)
+					out.print("0");
+				if (weekData[x][5] == 0)
+					out.print(" AM ");
+				else
+					out.print(" PM ");
+				out.print("Total Hours Worked: ");
+				out.println(df.format(timeWorked[x]));
+				break;
+
+			case 1:
+				out.print("Monday| In Time: ");
+				out.print(weekData[x][0]);
+				out.print(":");
+				out.print(weekData[x][1]);
+				if (weekData[x][1] == 0)
+					out.print("0");
+				if (weekData[x][2] == 0)
+					out.print(" AM ");
+				else
+					out.print(" PM ");
+				out.print("Out Time: ");
+				out.print(weekData[x][3]);
+				out.print(":");
+				out.print(weekData[x][4]);
+				if (weekData[x][4] == 0)
+					out.print("0");
+				if (weekData[x][5] == 0)
+					out.print(" AM ");
+				else
+					out.print(" PM ");
+				out.print("Total Hours Worked: ");
+				out.println(df.format(timeWorked[x]));
+				break;
+
+			case 2:
+				out.print("Tuesday| In Time: ");
+				out.print(weekData[x][0]);
+				out.print(":");
+				out.print(weekData[x][1]);
+				if (weekData[x][1] == 0)
+					out.print("0");
+				if (weekData[x][2] == 0)
+					out.print(" AM ");
+				else
+					out.print(" PM ");
+				out.print("Out Time: ");
+				out.print(weekData[x][3]);
+				out.print(":");
+				out.print(weekData[x][4]);
+				if (weekData[x][4] == 0)
+					out.print("0");
+				if (weekData[x][5] == 0)
+					out.print(" AM ");
+				else
+					out.print(" PM ");
+				out.print("Total Hours Worked: ");
+				out.println(df.format(timeWorked[x]));
+				break;
+
+			case 3:
+				out.print("Wednesday| In Time: ");
+				out.print(weekData[x][0]);
+				out.print(":");
+				out.print(weekData[x][1]);
+				if (weekData[x][1] == 0)
+					out.print("0");
+				if (weekData[x][2] == 0)
+					out.print(" AM ");
+				else
+					out.print(" PM ");
+				out.print("Out Time: ");
+				out.print(weekData[x][3]);
+				out.print(":");
+				out.print(weekData[x][4]);
+				if (weekData[x][4] == 0)
+					out.print("0");
+				if (weekData[x][5] == 0)
+					out.print(" AM ");
+				else
+					out.print(" PM ");
+				out.print("Total Hours Worked: ");
+				out.println(df.format(timeWorked[x]));
+				break;
+
+			case 4:
+				out.print("Thursday| In Time: ");
+				out.print(weekData[x][0]);
+				out.print(":");
+				out.print(weekData[x][1]);
+				if (weekData[x][1] == 0)
+					out.print("0");
+				if (weekData[x][2] == 0)
+					out.print(" AM ");
+				else
+					out.print(" PM ");
+				out.print("Out Time: ");
+				out.print(weekData[x][3]);
+				out.print(":");
+				out.print(weekData[x][4]);
+				if (weekData[x][4] == 0)
+					out.print("0");
+				if (weekData[x][5] == 0)
+					out.print(" AM ");
+				else
+					out.print(" PM ");
+				out.print("Total Hours Worked: ");
+				out.println(df.format(timeWorked[x]));
+				break;
+
+			case 5:
+				out.print("Friday| In Time: ");
+				out.print(weekData[x][0]);
+				out.print(":");
+				out.print(weekData[x][1]);
+				if (weekData[x][1] == 0)
+					out.print("0");
+				if (weekData[x][2] == 0)
+					out.print(" AM ");
+				else
+					out.print(" PM ");
+				out.print("Out Time: ");
+				out.print(weekData[x][3]);
+				out.print(":");
+				out.print(weekData[x][4]);
+				if (weekData[x][4] == 0)
+					out.print("0");
+				if (weekData[x][5] == 0)
+					out.print(" AM ");
+				else
+					out.print(" PM ");
+				out.print("Total Hours Worked: ");
+				out.println(df.format(timeWorked[x]));
+				break;
+
+			case 6:
+				out.print("Saturday| In Time: ");
+				out.print(weekData[x][0]);
+				out.print(":");
+				out.print(weekData[x][1]);
+				if (weekData[x][1] == 0)
+					out.print("0");
+				if (weekData[x][2] == 0)
+					out.print(" AM ");
+				else
+					out.print(" PM ");
+				out.print("Out Time: ");
+				out.print(weekData[x][3]);
+				out.print(":");
+				out.print(weekData[x][4]);
+				if (weekData[x][4] == 0)
+					out.print("0");
+				if (weekData[x][5] == 0)
+					out.print(" AM ");
+				else
+					out.print(" PM ");
+				out.print("Total Hours Worked: ");
+				out.println(df.format(timeWorked[x]));
+				break;
+
+			}
+		}
+		out.print(df.format(totHrsWorked));
+		out.println(" Total Hours Worked");
+
+		out.print("$ " + df.format(grossIncome));
+		out.println(" Total Earned");
+
+		out.print("$ " + df.format(netIncome));
+		out.print(" Net Earned");
+
+		out.close();
+
+	}
 }

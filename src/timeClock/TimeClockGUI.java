@@ -38,10 +38,6 @@ import javax.swing.border.EmptyBorder;
  */
 public class TimeClockGUI extends JFrame implements ActionListener {
 
-	private ActionListener updateClockAction;
-
-	Timer t = new Timer(1000, updateClockAction);
-
 	/**
 	 * Default serial ID.
 	 */
@@ -219,8 +215,6 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 	/** JLabel for pay rate. **/
 	private JLabel lblPayRate = new JLabel("Pay Rate");
 
-	private JLabel clock = new JLabel(new Date().toString());
-
 	/** JLabel for pay rate per hour. **/
 	private JLabel lblPerHr = new JLabel("Per Hour");
 
@@ -334,6 +328,14 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 
 	/** Clock object for money and time calculations. **/
 	private Clock week = new Clock();
+    private JTextField federalBox;
+    private JTextField socialBox;
+    private JTextField medicareBox;
+    private JTextField stateBox;
+    private final JLabel lblMedicareTax = new JLabel("Medicare Tax");
+    private final JLabel lblStateTax_1 = new JLabel("State Tax");
+    private final JLabel lblSocialSecurityTax = new JLabel("Social Security Tax");
+    private final JLabel lblFederalTax = new JLabel("Federal Tax");
 
 	/**
 	 * Main method that launches the GUI.
@@ -358,9 +360,6 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 	 * TimeClockGUI Constructor.
 	 */
 	public TimeClockGUI() {
-		t.start();
-		t.addActionListener(this);
-
 		setBackground(new Color(255, 255, 255));
 
 		setTitle("CS350 Punch Clock");
@@ -841,10 +840,6 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		lblPayRate.setBounds(48, 623, 98, 25);
 		contentPane.add(lblPayRate);
 
-		clock.setFont(new Font("Tahoma", Font.BOLD, 20));
-		clock.setBounds(48, 675, 500, 25);
-		contentPane.add(clock);
-
 		setPayRateDollars(new JTextField());
 		getPayRateDollars().setText("10.00");
 		getPayRateDollars().setToolTipText("");
@@ -939,6 +934,50 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 		exportItem.addActionListener(this);
 		importItem.addActionListener(this);
 		resetItem.addActionListener(this);
+		
+		federalBox = new JTextField();
+        federalBox.setFont(new Font("Tahoma", Font.BOLD, 20));
+        federalBox.setText("11");
+        federalBox.setBounds(182, 695, 99, 27);
+        contentPane.add(federalBox);
+        federalBox.setColumns(10);
+        
+        socialBox = new JTextField();
+        socialBox.setText("6.2");
+        socialBox.setFont(new Font("Tahoma", Font.BOLD, 20));
+        socialBox.setBounds(252, 732, 99, 27);
+        contentPane.add(socialBox);
+        socialBox.setColumns(10);
+        
+        medicareBox = new JTextField();
+        medicareBox.setText("1.45");
+        medicareBox.setFont(new Font("Tahoma", Font.BOLD, 20));
+        medicareBox.setBounds(199, 765, 99, 27);
+        contentPane.add(medicareBox);
+        medicareBox.setColumns(10);
+        
+        stateBox= new JTextField();
+        stateBox.setText("N/A");
+        stateBox.setFont(new Font("Tahoma", Font.BOLD, 20));
+        stateBox.setBounds(160, 802, 99, 27);
+        contentPane.add(stateBox);
+        stateBox.setColumns(10);
+        lblMedicareTax.setFont(new Font("Tahoma", Font.BOLD, 20));
+        lblMedicareTax.setBounds(48, 766, 174, 25);
+        
+        contentPane.add(lblMedicareTax);
+        lblStateTax_1.setFont(new Font("Tahoma", Font.BOLD, 20));
+        lblStateTax_1.setBounds(48, 800, 174, 25);
+        
+        contentPane.add(lblStateTax_1);
+        lblSocialSecurityTax.setFont(new Font("Tahoma", Font.BOLD, 20));
+        lblSocialSecurityTax.setBounds(48, 733, 194, 25);
+        
+        contentPane.add(lblSocialSecurityTax);
+        lblFederalTax.setFont(new Font("Tahoma", Font.BOLD, 20));
+        lblFederalTax.setBounds(47, 697, 194, 25);
+        
+        contentPane.add(lblFederalTax);
 	}
 
 	/**
@@ -1308,13 +1347,8 @@ public class TimeClockGUI extends JFrame implements ActionListener {
 
 		}
 
-		// if (resetItem == action)
-		// clock.resetWeek();
-
-		if (t == action) {
-			clock.setText(new Date().toString());
-		}
-
+		if (resetItem == action)
+		week.resetWeek();
 	}
 
 	/**
