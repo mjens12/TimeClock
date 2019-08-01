@@ -448,6 +448,22 @@ ItemListener {
 		this.payRateDollars = payRateDollars;
 	}
 	
+	public double getFederalBox() {
+		return Double.parseDouble(federalBox.getText());
+	}
+	
+	public double getMedBox() {
+		return Double.parseDouble(medicareBox.getText());
+	}
+	
+	public double getSocBox() {
+		return Double.parseDouble(socialBox.getText());
+	}
+	
+	public double getStateBox() {
+		return Double.parseDouble(stateBox.getText());
+	}
+	
 	/**
 	 * Constructor for PunchClockGUI.
 	 */
@@ -1176,6 +1192,67 @@ ItemListener {
 							+ " to $15.00");
 			getPayRateDollars().setText("15.00");
 		}
+		
+		//Try-Catch block to check that the Federal Percentage is correct.
+		try
+		{
+			double testFedTax= getFederalBox();
+			
+			if(testFedTax < 0.00 || testFedTax> 100.00) {
+				JOptionPane.showMessageDialog(null, "Please enter "
+						+ "a valid Federal Tax value in percentage (0-100%)");
+			}
+		}
+		catch (NumberFormatException e)
+		{
+			JOptionPane.showMessageDialog(null, "Please enter "
+					+ "a valid Federal Tax value in percentage (0-100%)");
+		}
+		
+		try
+		{
+			double testStateTax= getStateBox();
+			
+			if(testStateTax < 0.00 || testStateTax> 100.00) {
+				JOptionPane.showMessageDialog(null, "Please enter "
+						+ "a valid State Tax value in percentage (0-100%)");
+			}
+		}
+		catch (NumberFormatException e)
+		{
+			JOptionPane.showMessageDialog(null, "Please enter "
+					+ "a valid State Tax value in percentage (0-100%)");
+		}
+		
+		try
+		{
+			double testSocialTax= getSocBox();
+			
+			if(testSocialTax < 0.00 || testSocialTax> 100.00) {
+				JOptionPane.showMessageDialog(null, "Please enter "
+						+ "a valid Social Security Tax value in percentage (0-100%)");
+			}
+		}
+		catch (NumberFormatException e)
+		{
+			JOptionPane.showMessageDialog(null, "Please enter "
+					+ "a valid Social Security Tax value in percentage (0-100%)");
+		}
+		
+		try
+		{
+			double testMedTax= getMedBox();
+			
+			if(testMedTax < 0.00 || testMedTax> 100.00) {
+				JOptionPane.showMessageDialog(null, "Please enter "
+						+ "a valid Medicare Tax value in percentage (0-100%)");
+			}
+		}
+		catch (NumberFormatException e)
+		{
+			JOptionPane.showMessageDialog(null, "Please enter "
+					+ "a valid Medicare Tax value in percentage (0-100%)");
+		}
 
 		double payRate =
 				Double.parseDouble(
@@ -1185,12 +1262,16 @@ ItemListener {
 				Double.parseDouble(weekTotHrs.getText()),
 				payRate);
 
-		double netPay = money.calcNetEarnings(grossPay);
-
+		//NEW WITH TAX CHECKING
+		double netPay = money.taxAmounts(Double.parseDouble(federalBox.getText()),
+				Double.parseDouble(socialBox.getText()), Double.parseDouble(medicareBox.getText()),
+				Double.parseDouble(stateBox.getText()), grossPay); //TAX AMOUNTS
+		
 		weekGrossDollars.setText("$" + df.format(grossPay));
 		weekNetPay.setText("$" + df.format(netPay));
 
 	}
+	
 	
 	/**
 	 * Method that updates the total hours worked for every day of the

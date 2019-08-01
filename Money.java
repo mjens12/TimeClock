@@ -104,6 +104,26 @@ public class Money {
 	       
 	       return netPay;
 	   }
+	 
+	 public double taxAmounts(final double federal, final double soc, 
+			 final double med, final double state, final double grossPay) {
+		 
+		 final double fedIncomeTax = federal/100;
+	     final double socSecurityTax = soc/100;
+	     final double medicareTax = med/100;
+	     final double stateTax= state/100;
+	       
+	     final double fedTakeOut = grossPay * fedIncomeTax;
+	     final double socTakeOut = grossPay * socSecurityTax;
+	     final double medTakeOut = grossPay * medicareTax;
+	     final double stateTakeout= grossPay * stateTax;
+	       
+	     double netPay = grossPay - fedTakeOut
+	               - socTakeOut - medTakeOut- stateTakeout;
+	       
+	     return netPay;
+		 
+	 }
 
 	 
 	
