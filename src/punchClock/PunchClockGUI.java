@@ -27,22 +27,21 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-
 /**
  * PunchClockGUI is the main class of the Time Clock software.
  * 
- * This is the front end of the Time Clock software. All JComponents
- * and Action Listeners are within this class. Action listeners call
- * various classes such as Clock.java and potential dialog classes.
+ * This is the front end of the Time Clock software. All JComponents and Action
+ * Listeners are within this class. Action listeners call various classes such
+ * as Clock.java and potential dialog classes.
  * 
- * Entire GUI (Except for action listeners) was created and generated
- * using the Eclipse Window Builder PlugIn.
+ * Entire GUI (Except for action listeners) was created and generated using the
+ * Eclipse Window Builder PlugIn.
  * 
  * @author Tyler Hay, Freeman Ogburn, Max Jensen
  *
  */
-public class PunchClockGUI extends JFrame implements ActionListener,
-ItemListener {
+public class PunchClockGUI extends JFrame
+		implements ActionListener, ItemListener {
 
 	/**
 	 * Default serial ID.
@@ -51,29 +50,28 @@ ItemListener {
 
 	/** Formatter Object to format doubles 2 decimal spaces. **/
 	private static DecimalFormat df = new DecimalFormat("0.00");
-	
+
 	/** JPanel to hold the GUI contents. **/
 	private JPanel contentPane;
 
 	/** Menu bar to hold drop down menu. **/
 	private JMenuBar menus = new JMenuBar();
-	
+
 	/** Menu to hold optional actions. **/
 	private JMenu mainMenu = new JMenu("Main Menu");
-	
+
 	/** Menu Item used to export data as .txt. **/
 	private JMenuItem exportItem = new JMenuItem("Export As Text");
-	
+
 	/** Menu Item used to import data from .txt. **/
 	private JMenuItem importItem = new JMenuItem("Import From Text");
-	
+
 	/** Menu Item used to reset the Time Punch data. **/
 	private JMenuItem resetItem = new JMenuItem("Reset All Fields");
 
-	
-	//JTEXTFIELDS FOR SUN-SAT
-	
-	//CLOCK-IN HOUR TEXTFIELDS
+	// JTEXTFIELDS FOR SUN-SAT
+
+	// CLOCK-IN HOUR TEXTFIELDS
 
 	/**
 	 * JTextField for user to enter in Sunday clock-in hour.
@@ -94,7 +92,7 @@ ItemListener {
 	 * JTextField for user to enter in Wednesday clock-in hour.
 	 */
 	private JTextField wedInHr;
-	
+
 	/**
 	 * JTextField for user to enter in Thursday clock-in hour.
 	 */
@@ -110,8 +108,7 @@ ItemListener {
 	 */
 	private JTextField satInHr;
 
-	
-	//CLOCK IN MINUTE TEXTFIELDS
+	// CLOCK IN MINUTE TEXTFIELDS
 	/**
 	 * JTextField for user to enter in Sunday clock-in hour.
 	 */
@@ -147,8 +144,7 @@ ItemListener {
 	 */
 	private JTextField satInMin;
 
-	
-	//CLOCK-OUT HOUR TEXTFIELDS
+	// CLOCK-OUT HOUR TEXTFIELDS
 	/**
 	 * JTextField for user to enter in Sunday clock-out hour.
 	 */
@@ -184,7 +180,7 @@ ItemListener {
 	 */
 	private JTextField satOutHr;
 
-	//CLOCK OUT MINUTE TEXTFIELDS
+	// CLOCK OUT MINUTE TEXTFIELDS
 	/**
 	 * JTextField for user to enter in Sunday clock-out minute.
 	 */
@@ -220,7 +216,6 @@ ItemListener {
 	 */
 	private JTextField satOutMin;
 
-	
 	/**
 	 * JTextField for user to enter in their pay rate.
 	 */
@@ -348,65 +343,62 @@ ItemListener {
 
 	/** JButton that allows user to enter in all given inputs. **/
 	private JButton enterButton = new JButton("Enter");
-	
+
 	/** JCheckBox to enable/disable overtime. **/
 	private final JCheckBox overtimeCheckBox = new JCheckBox("");
-	
+
 	/** JCheckBox to Enable/Disable Sunday. **/
 	private final JCheckBox sunCheckBox = new JCheckBox("");
-	
+
 	/** JCheckBox to Enable/Disable Monday. **/
 	private final JCheckBox monCheckBox = new JCheckBox("");
-	
+
 	/** JCheckBox to Enable/Disable Tuesday. **/
 	private final JCheckBox tuesCheckBox = new JCheckBox("");
-	
+
 	/** JCheckBox to Enable/Disable Wednesday. **/
 	private final JCheckBox wedCheckBox = new JCheckBox("");
-	
+
 	/** JCheckBox to Enable/Disable Thursday. **/
 	private final JCheckBox thursCheckBox = new JCheckBox("");
-	
+
 	/** JCheckBox to Enable/Disable Friday. **/
 	private final JCheckBox friCheckBox = new JCheckBox("");
-	
+
 	/** JCheckBox to Enable/Disable Saturday. **/
 	private final JCheckBox satCheckBox = new JCheckBox("");
-	
-	
 
 	/** Week object for time calculations. **/
 	private Week week = new Week();
-	
+
 	/** Money object for currency calculations. **/
 	private Money money = new Money();
-	
-	/** JTextField for Federal Tax. **/
-    private JTextField federalBox;
-    
-    /** JTextField for Social Security Tax. **/
-    private JTextField socialBox;
-    
-    /** JTextField for Medicare Tax. **/
-    private JTextField medicareBox;
-    
-    /** JTextField for State Income Tax. **/
-    private JTextField stateBox;
-    
-    /** JLable for Medicare Tax. **/
-    private final JLabel lblMedicareTax = new JLabel("Medicare Tax");
-    
-    /** JLabel for State Income Tax. **/
-    private final JLabel lblStateTax1 = new JLabel("State Tax");
-    
-    /** JLabel for Social Security Tax. **/
-    private final JLabel lblSocialSecurityTax = 
-    		new JLabel("Social Security Tax");
-    
-    /** JLabel for Federal Tax. **/
-    private final JLabel lblFederalTax = new JLabel("Federal Tax");
 
-    
+	/** JTextField for Federal Tax. **/
+	private JTextField federalBox;
+
+	/** JTextField for Social Security Tax. **/
+	private JTextField socialBox;
+
+	/** JTextField for Medicare Tax. **/
+	private JTextField medicareBox;
+
+	/** JTextField for State Income Tax. **/
+	private JTextField stateBox;
+
+	/** JLable for Medicare Tax. **/
+	private final JLabel lblMedicareTax = new JLabel("Medicare Tax");
+
+	/** JLabel for State Income Tax. **/
+	private final JLabel lblStateTax1 = new JLabel("State Tax");
+
+	/** JLabel for Social Security Tax. **/
+	private final JLabel lblSocialSecurityTax = new JLabel(
+			"Social Security Tax");
+
+	/** JLabel for Federal Tax. **/
+	private final JLabel lblFederalTax = new JLabel("Federal Tax");
+
 	/**
 	 * Main method that launches the GUI.
 	 * 
@@ -417,8 +409,7 @@ ItemListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PunchClockGUI frame
-					= new PunchClockGUI();
+					PunchClockGUI frame = new PunchClockGUI();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -426,10 +417,10 @@ ItemListener {
 			}
 		});
 	}
-	
+
 	/**
-	 * Getter method for payRateDollars JTextfield. method is needed
-	 * for JUnits tests
+	 * Getter method for payRateDollars JTextfield. method is needed for JUnits
+	 * tests
 	 * 
 	 * @return JTextfield for payRateDollars.
 	 */
@@ -438,8 +429,7 @@ ItemListener {
 	}
 
 	/**
-	 * setter method for payRateDollars JTextField. method is needed
-	 * for JUnit tests
+	 * setter method for payRateDollars JTextField. method is needed for JUnit tests
 	 * 
 	 * @param payRateDollars
 	 *            JTextField containing a string value.
@@ -447,41 +437,38 @@ ItemListener {
 	public void setPayRateDollars(final JTextField payRateDollars) {
 		this.payRateDollars = payRateDollars;
 	}
-	
+
 	public double getFederalBox() {
 		return Double.parseDouble(federalBox.getText());
 	}
-	
+
 	public double getMedBox() {
 		return Double.parseDouble(medicareBox.getText());
 	}
-	
+
 	public double getSocBox() {
 		return Double.parseDouble(socialBox.getText());
 	}
-	
+
 	public double getStateBox() {
 		return Double.parseDouble(stateBox.getText());
 	}
-	
+
 	/**
 	 * Constructor for PunchClockGUI.
 	 */
 	public PunchClockGUI() {
-		
-		//Array to hold values for AM/PM JComboBox
-		String[] stringAMPM = {"AM", "PM"};
-		
-		//Array to hold list of currencies.
-		String[] currencyList = {
-				"United States Dollar (USD)(US$)",
-				"Euro (EUR)(\u20AC)",
-				"Japanese Yen (JPY)(\u00A5)",
+
+		// Array to hold values for AM/PM JComboBox
+		String[] stringAMPM = { "AM", "PM" };
+
+		// Array to hold list of currencies.
+		String[] currencyList = { "United States Dollar (USD)(US$)",
+				"Euro (EUR)(\u20AC)", "Japanese Yen (JPY)(\u00A5)",
 				"Pound Sterling (GBP)(\u00A3)",
 				"Australian Dollar (AUD)(A$)",
 				"Canadian Dollar (CAD) (C$)",
-				"Mexican Peso (MXN)($)"
-		};
+				"Mexican Peso (MXN)($)" };
 
 		setBackground(new Color(255, 255, 255));
 
@@ -502,11 +489,10 @@ ItemListener {
 
 		setJMenuBar(menus);
 
-		JLabel lblPunchClock =
-				new JLabel("Punch Clock & Wage Calculator");
+		JLabel lblPunchClock = new JLabel(
+				"Punch Clock & Wage Calculator");
 		lblPunchClock.setFont(
-				new Font("Arial Rounded MT Bold",
-						Font.BOLD, 30));
+				new Font("Arial Rounded MT Bold", Font.BOLD, 30));
 		lblPunchClock.setBounds(237, 45, 531, 48);
 		contentPane.add(lblPunchClock);
 
@@ -967,7 +953,8 @@ ItemListener {
 		setPayRateDollars(new JTextField());
 		getPayRateDollars().setText("10.00");
 		getPayRateDollars().setToolTipText("");
-		getPayRateDollars().setFont(new Font("Tahoma", Font.BOLD, 20));
+		getPayRateDollars()
+				.setFont(new Font("Tahoma", Font.BOLD, 20));
 		getPayRateDollars().setColumns(10);
 		getPayRateDollars().setBounds(184, 621, 91, 27);
 		contentPane.add(getPayRateDollars());
@@ -1048,67 +1035,68 @@ ItemListener {
 		exportItem.addActionListener(this);
 		importItem.addActionListener(this);
 		resetItem.addActionListener(this);
-		
+
 		federalBox = new JTextField();
-        federalBox.setFont(new Font("Tahoma", Font.BOLD, 20));
-        federalBox.setText("11");
-        federalBox.setBounds(33, 825, 99, 27);
-        contentPane.add(federalBox);
-        federalBox.setColumns(10);
-        
-        socialBox = new JTextField();
-        socialBox.setText("6.2");
-        socialBox.setFont(new Font("Tahoma", Font.BOLD, 20));
-        socialBox.setBounds(343, 825, 99, 27);
-        contentPane.add(socialBox);
-        socialBox.setColumns(10);
-        
-        medicareBox = new JTextField();
-        medicareBox.setText("1.45");
-        medicareBox.setFont(new Font("Tahoma", Font.BOLD, 20));
-        medicareBox.setBounds(539, 825, 99, 27);
-        contentPane.add(medicareBox);
-        medicareBox.setColumns(10);
-        
-        stateBox = new JTextField();
-        stateBox.setText("0");
-        stateBox.setFont(new Font("Tahoma", Font.BOLD, 20));
-        stateBox.setBounds(184, 825, 99, 27);
-        contentPane.add(stateBox);
-        stateBox.setColumns(10);
-        lblMedicareTax.setFont(new Font("Tahoma", Font.BOLD, 20));
-        lblMedicareTax.setBounds(519, 800, 174, 25);
-        
-        contentPane.add(lblMedicareTax);
-        lblStateTax1.setFont(new Font("Tahoma", Font.BOLD, 20));
-        lblStateTax1.setBounds(184, 800, 104, 25);
-        
-        contentPane.add(lblStateTax1);
-        lblSocialSecurityTax.setFont(new Font("Tahoma", Font.BOLD, 20));
-        lblSocialSecurityTax.setBounds(300, 800, 194, 25);
-        
-        contentPane.add(lblSocialSecurityTax);
-        lblFederalTax.setFont(new Font("Tahoma", Font.BOLD, 20));
-        lblFederalTax.setBounds(23, 800, 124, 25);
-        
-        contentPane.add(lblFederalTax);
-        
-        JLabel lblOvertime = new JLabel("Overtime");
+		federalBox.setFont(new Font("Tahoma", Font.BOLD, 20));
+		federalBox.setText("11");
+		federalBox.setBounds(33, 825, 99, 27);
+		contentPane.add(federalBox);
+		federalBox.setColumns(10);
+
+		socialBox = new JTextField();
+		socialBox.setText("6.2");
+		socialBox.setFont(new Font("Tahoma", Font.BOLD, 20));
+		socialBox.setBounds(343, 825, 99, 27);
+		contentPane.add(socialBox);
+		socialBox.setColumns(10);
+
+		medicareBox = new JTextField();
+		medicareBox.setText("1.45");
+		medicareBox.setFont(new Font("Tahoma", Font.BOLD, 20));
+		medicareBox.setBounds(539, 825, 99, 27);
+		contentPane.add(medicareBox);
+		medicareBox.setColumns(10);
+
+		stateBox = new JTextField();
+		stateBox.setText("0");
+		stateBox.setFont(new Font("Tahoma", Font.BOLD, 20));
+		stateBox.setBounds(184, 825, 99, 27);
+		contentPane.add(stateBox);
+		stateBox.setColumns(10);
+		lblMedicareTax.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblMedicareTax.setBounds(519, 800, 174, 25);
+
+		contentPane.add(lblMedicareTax);
+		lblStateTax1.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblStateTax1.setBounds(184, 800, 104, 25);
+
+		contentPane.add(lblStateTax1);
+		lblSocialSecurityTax
+				.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblSocialSecurityTax.setBounds(300, 800, 194, 25);
+
+		contentPane.add(lblSocialSecurityTax);
+		lblFederalTax.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblFederalTax.setBounds(23, 800, 124, 25);
+
+		contentPane.add(lblFederalTax);
+
+		JLabel lblOvertime = new JLabel("Overtime");
 		lblOvertime.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblOvertime.setBounds(412, 621, 99, 29);
 		contentPane.add(lblOvertime);
-		
+
 		overtimeCheckBox.setBackground(new Color(135, 206, 250));
 		overtimeCheckBox.setBounds(382, 617, 25, 40);
 		contentPane.add(overtimeCheckBox);
 		overtimeCheckBox.addItemListener(this);
-		
+
 		sunCheckBox.setSelected(true);
 		sunCheckBox.setBackground(new Color(135, 206, 250));
 		sunCheckBox.setBounds(8, 257, 32, 37);
 		contentPane.add(sunCheckBox);
 		sunCheckBox.addItemListener(this);
-		
+
 		monCheckBox.setSelected(true);
 		monCheckBox.setBackground(new Color(135, 206, 250));
 		monCheckBox.setBounds(8, 312, 32, 37);
@@ -1143,9 +1131,10 @@ ItemListener {
 		satCheckBox.setBackground(new Color(135, 206, 250));
 		satCheckBox.setBounds(8, 558, 32, 37);
 		contentPane.add(satCheckBox);
-		
+
 		JComboBox<String> moneyComboBox = new JComboBox<String>();
-		moneyComboBox.setModel(new DefaultComboBoxModel<String>(currencyList));
+		moneyComboBox.setModel(
+				new DefaultComboBoxModel<String>(currencyList));
 		moneyComboBox.setMaximumRowCount(10);
 		moneyComboBox.setFont(new Font("Tahoma", Font.BOLD, 15));
 		moneyComboBox.setBounds(48, 671, 276, 48);
@@ -1156,134 +1145,129 @@ ItemListener {
 	/**
 	 * Method that updates the JLabels involving Gross and Net Income.
 	 * 
-	 * The method sets the payRate variable to the double value that
-	 * was entered by the user.
+	 * The method sets the payRate variable to the double value that was entered by
+	 * the user.
 	 * 
-	 * The method then calls the calcGrossEarnings and calcNetEarnings
-	 * methods in Money.java to calculate the total amount of capital
-	 * earned for the week.
+	 * The method then calls the calcGrossEarnings and calcNetEarnings methods in
+	 * Money.java to calculate the total amount of capital earned for the week.
 	 * 
-	 * After these calculations are made, the method updates the
-	 * JLabels for Gross and Net income so that the user may see how
-	 * much capital they have earned based on the weekly hours and pay
-	 * rate they have entered.
+	 * After these calculations are made, the method updates the JLabels for Gross
+	 * and Net income so that the user may see how much capital they have earned
+	 * based on the weekly hours and pay rate they have entered.
 	 */
 	void updatePay() {
 
 		// Try-Catch block to check that payRate input is correct.
 		try {
-			double testpayRate = Double.parseDouble(
-					getPayRateDollars().getText());
+			double testpayRate = Double
+					.parseDouble(getPayRateDollars().getText());
 
 			if (testpayRate < 0.00) {
 				JOptionPane.showMessageDialog(null,
-						"Pay Rate must be "
-						+ "a positive number."
-						+ " Defaulting to $15.00");
+						"Pay Rate must be " + "a positive number."
+								+ " Defaulting to $15.00");
 
 				testpayRate = 15.00;
 				getPayRateDollars().setText("15.00");
 			}
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null,
-					"Pay Rate must be a positive"
-							+ "number."
-							+ " Defaulting pay rate"
-							+ " to $15.00");
+					"Pay Rate must be a positive" + "number."
+							+ " Defaulting pay rate" + " to $15.00");
 			getPayRateDollars().setText("15.00");
 		}
-		
-		//Try-Catch block to check that the Federal Percentage is correct.
-		try
-		{
-			double testFedTax= getFederalBox();
-			
-			if(testFedTax < 0.00 || testFedTax> 100.00) {
+
+		// Try-Catch block to check that the Federal Percentage is correct.
+		try {
+			double testFedTax = getFederalBox();
+
+			if (testFedTax < 0.00 || testFedTax > 100.00) {
 				JOptionPane.showMessageDialog(null, "Please enter "
 						+ "a valid Federal Tax value in percentage (0-100%)");
 			}
-		}
-		catch (NumberFormatException e)
-		{
+		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Please enter "
 					+ "a valid Federal Tax value in percentage (0-100%)");
 		}
-		
-		try
-		{
-			double testStateTax= getStateBox();
-			
-			if(testStateTax < 0.00 || testStateTax> 100.00) {
+
+		try {
+			double testStateTax = getStateBox();
+
+			if (testStateTax < 0.00 || testStateTax > 100.00) {
 				JOptionPane.showMessageDialog(null, "Please enter "
 						+ "a valid State Tax value in percentage (0-100%)");
 			}
-		}
-		catch (NumberFormatException e)
-		{
+		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Please enter "
 					+ "a valid State Tax value in percentage (0-100%)");
 		}
-		
-		try
-		{
-			double testSocialTax= getSocBox();
-			
-			if(testSocialTax < 0.00 || testSocialTax> 100.00) {
+
+		try {
+			double testSocialTax = getSocBox();
+
+			if (testSocialTax < 0.00 || testSocialTax > 100.00) {
 				JOptionPane.showMessageDialog(null, "Please enter "
 						+ "a valid Social Security Tax value in percentage (0-100%)");
 			}
-		}
-		catch (NumberFormatException e)
-		{
+		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Please enter "
 					+ "a valid Social Security Tax value in percentage (0-100%)");
 		}
-		
-		try
-		{
-			double testMedTax= getMedBox();
-			
-			if(testMedTax < 0.00 || testMedTax> 100.00) {
+
+		try {
+			double testMedTax = getMedBox();
+
+			if (testMedTax < 0.00 || testMedTax > 100.00) {
 				JOptionPane.showMessageDialog(null, "Please enter "
 						+ "a valid Medicare Tax value in percentage (0-100%)");
 			}
-		}
-		catch (NumberFormatException e)
-		{
+		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Please enter "
 					+ "a valid Medicare Tax value in percentage (0-100%)");
 		}
 
-		double payRate =
-				Double.parseDouble(
-						getPayRateDollars().getText());
+		try {
+			double testTotalTax = getMedBox() + getSocBox()
+					+ getFederalBox() + getStateBox();
+
+			if (testTotalTax > 100.00) {
+				JOptionPane.showMessageDialog(null,
+						"The total taxes are over 100%. Please enter"
+						+ "tax values that do not exceed 100% in total");
+			}
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null,
+					"The total taxes are over 100%. Please enter"
+							+ "tax values that do not exceed 100% in total");
+		}
+
+		double payRate = Double
+				.parseDouble(getPayRateDollars().getText());
 
 		double grossPay = money.calcGrossEarnings(
-				Double.parseDouble(weekTotHrs.getText()),
-				payRate);
+				Double.parseDouble(weekTotHrs.getText()), payRate);
 
-		//NEW WITH TAX CHECKING
-		double netPay = money.taxAmounts(Double.parseDouble(federalBox.getText()),
-				Double.parseDouble(socialBox.getText()), Double.parseDouble(medicareBox.getText()),
-				Double.parseDouble(stateBox.getText()), grossPay); //TAX AMOUNTS
-		
+		// NEW WITH TAX CHECKING
+		double netPay = money.taxAmounts(
+				Double.parseDouble(federalBox.getText()),
+				Double.parseDouble(socialBox.getText()),
+				Double.parseDouble(medicareBox.getText()),
+				Double.parseDouble(stateBox.getText()), grossPay); // TAX AMOUNTS
+
 		weekGrossDollars.setText("$" + df.format(grossPay));
 		weekNetPay.setText("$" + df.format(netPay));
 
 	}
-	
-	
+
 	/**
-	 * Method that updates the total hours worked for every day of the
-	 * week.
+	 * Method that updates the total hours worked for every day of the week.
 	 * 
-	 * Contains a switch-case that cycles through every day of the
-	 * week. It will call the calcTime method in Week.java with
-	 * parameters for that particular day.
+	 * Contains a switch-case that cycles through every day of the week. It will
+	 * call the calcTime method in Week.java with parameters for that particular
+	 * day.
 	 * 
-	 * After all total hours are calculated. The method updates the
-	 * total hour JLabels for each day so the user may see the total
-	 * calculated hours.
+	 * After all total hours are calculated. The method updates the total hour
+	 * JLabels for each day so the user may see the total calculated hours.
 	 */
 	public void updateCalcHrs() {
 
@@ -1344,9 +1328,8 @@ ItemListener {
 		thusTotHrs.setText(df.format(thurs));
 		friTotHrs.setText(df.format(fri));
 		satTotHrs.setText(df.format(sat));
-		weekTotHrs.setText(
-				df.format(sun + mon + tues
-						+ wed + thurs + fri + sat));
+		weekTotHrs.setText(df
+				.format(sun + mon + tues + wed + thurs + fri + sat));
 
 		week.setTimeWorked(0, sun);
 		week.setTimeWorked(1, mon);
@@ -1355,22 +1338,21 @@ ItemListener {
 		week.setTimeWorked(4, thurs);
 		week.setTimeWorked(5, fri);
 		week.setTimeWorked(6, sat);
-		week.setTotHrsWorked(sun + mon + tues
-				+ wed + thurs + fri + sat);
+		week.setTotHrsWorked(
+				sun + mon + tues + wed + thurs + fri + sat);
 	}
-	
+
 	/**
-	 * Method that exports the current week and money data
-	 * to a .txt file. 
+	 * Method that exports the current week and money data to a .txt file.
 	 * 
-	 * @param filename name of the file being saved.
+	 * @param filename
+	 *            name of the file being saved.
 	 */
 	public void textOut(final String filename) {
 		PrintWriter out = null;
 		try {
-			out = new PrintWriter(new 
-					BufferedWriter(new
-							FileWriter(filename)));
+			out = new PrintWriter(
+					new BufferedWriter(new FileWriter(filename)));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1596,16 +1578,15 @@ ItemListener {
 		out.close();
 
 	}
-	
+
 	/**
 	 * Fills the WeekData Array with information from user input.
 	 * 
-	 * The method goes through every day of the week and parses in the
-	 * Hours, Minutes, and AM/PM choice for both the clock-in and
-	 * clock-out times.
+	 * The method goes through every day of the week and parses in the Hours,
+	 * Minutes, and AM/PM choice for both the clock-in and clock-out times.
 	 * 
-	 * If the user leaves a text field blank, a dialog will prompt the
-	 * user about it and default every section of that day to 0.
+	 * If the user leaves a text field blank, a dialog will prompt the user about it
+	 * and default every section of that day to 0.
 	 * 
 	 */
 	void setWeekDataArray() {
@@ -1624,7 +1605,7 @@ ItemListener {
 
 			week.setWeekData(0, 3,
 					Integer.parseInt(sunOutHr.getText()));
-			week.setWeekData(0, 4, 
+			week.setWeekData(0, 4,
 					Integer.parseInt(sunOutMin.getText()));
 
 			if (sunOutAMPMBox.getSelectedItem().equals("AM")) {
@@ -1635,7 +1616,7 @@ ItemListener {
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null,
 					"Could not parse Sunday input time!"
-					+ " Please enter a number.");
+							+ " Please enter a number.");
 		}
 
 		// Monday
@@ -1654,7 +1635,7 @@ ItemListener {
 
 			week.setWeekData(1, 3,
 					Integer.parseInt(monOutHr.getText()));
-			week.setWeekData(1, 4, 
+			week.setWeekData(1, 4,
 					Integer.parseInt(monOutMin.getText()));
 
 			if (monOutAMPMBox.getSelectedItem().equals("AM")) {
@@ -1665,7 +1646,7 @@ ItemListener {
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null,
 					"Could not parse Sunday input time!"
-					+ " Please enter a number.");
+							+ " Please enter a number.");
 		}
 
 		// Tuesday
@@ -1684,7 +1665,7 @@ ItemListener {
 
 			week.setWeekData(2, 3,
 					Integer.parseInt(tuesOutHr.getText()));
-			week.setWeekData(2, 4, 
+			week.setWeekData(2, 4,
 					Integer.parseInt(tuesOutMin.getText()));
 
 			if (tuesOutAMPMBox.getSelectedItem().equals("AM")) {
@@ -1695,7 +1676,7 @@ ItemListener {
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null,
 					"Could not parse Sunday input time!"
-					+ " Please enter a number.");
+							+ " Please enter a number.");
 		}
 
 		// Wednesday
@@ -1713,7 +1694,7 @@ ItemListener {
 
 			week.setWeekData(3, 3,
 					Integer.parseInt(wedOutHr.getText()));
-			week.setWeekData(3, 4, 
+			week.setWeekData(3, 4,
 					Integer.parseInt(wedOutMin.getText()));
 
 			if (wedOutAMPMBox.getSelectedItem().equals("AM")) {
@@ -1724,7 +1705,7 @@ ItemListener {
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null,
 					"Could not parse Sunday input time!"
-					+ " Please enter a number.");
+							+ " Please enter a number.");
 		}
 		// Thursday
 		try {
@@ -1741,9 +1722,8 @@ ItemListener {
 
 			week.setWeekData(4, 3,
 					Integer.parseInt(thursOutHr.getText()));
-			week.setWeekData(4, 4, 
-					Integer.parseInt(
-							thursOutMin.getText()));
+			week.setWeekData(4, 4,
+					Integer.parseInt(thursOutMin.getText()));
 
 			if (thursOutAMPMBox.getSelectedItem().equals("AM")) {
 				week.setWeekData(4, 5, 0);
@@ -1753,7 +1733,7 @@ ItemListener {
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null,
 					"Could not parse Sunday input time!"
-					+ " Please enter a number.");
+							+ " Please enter a number.");
 		}
 
 		// Friday
@@ -1771,7 +1751,7 @@ ItemListener {
 
 			week.setWeekData(5, 3,
 					Integer.parseInt(friOutHr.getText()));
-			week.setWeekData(5, 4, 
+			week.setWeekData(5, 4,
 					Integer.parseInt(friOutMin.getText()));
 
 			if (friOutAMPMBox.getSelectedItem().equals("AM")) {
@@ -1782,7 +1762,7 @@ ItemListener {
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null,
 					"Could not parse Sunday input time!"
-					+ " Please enter a number.");
+							+ " Please enter a number.");
 		}
 
 		// Saturday
@@ -1800,7 +1780,7 @@ ItemListener {
 
 			week.setWeekData(6, 3,
 					Integer.parseInt(satOutHr.getText()));
-			week.setWeekData(6, 4, 
+			week.setWeekData(6, 4,
 					Integer.parseInt(satOutMin.getText()));
 
 			if (satOutAMPMBox.getSelectedItem().equals("AM")) {
@@ -1811,21 +1791,20 @@ ItemListener {
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null,
 					"Could not parse Sunday input time!"
-					+ " Please enter a number.");
+							+ " Please enter a number.");
 		}
 
 	}
-	
+
 	/**
-	 * Performs actions based on any ActionEvent objects passed into
-	 * the method.
+	 * Performs actions based on any ActionEvent objects passed into the method.
 	 * 
 	 * @param e
 	 *            ActionEvent that is passed in. i.e JButton clicks.
 	 */
 	@Override
 	public void actionPerformed(final ActionEvent e) {
-		
+
 		Object action = e.getSource();
 
 		if (enterButton == action) {
@@ -1839,8 +1818,7 @@ ItemListener {
 			JFileChooser chooser = new JFileChooser();
 			int status = chooser.showSaveDialog(null);
 			if (status == JFileChooser.APPROVE_OPTION) {
-				String filename =
-						chooser.getSelectedFile()
+				String filename = chooser.getSelectedFile()
 						.getAbsolutePath();
 				if (exportItem == e.getSource()) {
 					textOut(filename);
@@ -1852,20 +1830,20 @@ ItemListener {
 		if (resetItem == action) {
 			week.resetWeek();
 		}
-		
+
 	}
-	
+
 	/**
-	 * Performs actions based on source of
-	 * ItemEvent object. 
-	 * @param e JComponent that user interacted
-	 * with.
+	 * Performs actions based on source of ItemEvent object.
+	 * 
+	 * @param e
+	 *            JComponent that user interacted with.
 	 */
 	@Override
 	public void itemStateChanged(final ItemEvent e) {
-		
+
 		Object source = e.getItemSelectable();
-		
+
 		if (overtimeCheckBox == source) {
 			if ((e.getStateChange() == ItemEvent.SELECTED)) {
 				money.setOT(true);
@@ -1873,10 +1851,10 @@ ItemListener {
 				money.setOT(false);
 			}
 		}
-		
+
 		if (sunCheckBox == source) {
 			if (e.getStateChange() == ItemEvent.DESELECTED) {
-				
+
 				sunInHr.setText("0");
 				sunInMin.setText("00");
 				sunOutHr.setText("0");
@@ -1899,10 +1877,10 @@ ItemListener {
 				sunTotHrs.setEnabled(true);
 			}
 		}
-		
+
 		if (monCheckBox == source) {
 			if (e.getStateChange() == ItemEvent.DESELECTED) {
-				
+
 				monInHr.setText("0");
 				monInMin.setText("00");
 				monOutHr.setText("0");
@@ -1926,10 +1904,10 @@ ItemListener {
 			}
 
 		}
-		
+
 		if (tuesCheckBox == source) {
 			if (e.getStateChange() == ItemEvent.DESELECTED) {
-				
+
 				tuesInHr.setText("0");
 				tuesInMin.setText("00");
 				tuesOutHr.setText("0");
@@ -1952,10 +1930,10 @@ ItemListener {
 				tuesTotHrs.setEnabled(true);
 			}
 		}
-		
+
 		if (wedCheckBox == source) {
 			if (e.getStateChange() == ItemEvent.DESELECTED) {
-				
+
 				wedInHr.setText("0");
 				wedInMin.setText("00");
 				wedOutHr.setText("0");
@@ -1981,7 +1959,7 @@ ItemListener {
 
 		if (thursCheckBox == source) {
 			if (e.getStateChange() == ItemEvent.DESELECTED) {
-				
+
 				thursInHr.setText("0");
 				thusInMin.setText("00");
 				thursOutHr.setText("0");
@@ -2007,7 +1985,7 @@ ItemListener {
 
 		if (friCheckBox == source) {
 			if (e.getStateChange() == ItemEvent.DESELECTED) {
-				
+
 				friInHr.setText("0");
 				friInMin.setText("00");
 				friOutHr.setText("0");
@@ -2033,7 +2011,7 @@ ItemListener {
 
 		if (satCheckBox == source) {
 			if (e.getStateChange() == ItemEvent.DESELECTED) {
-				
+
 				satInHr.setText("0");
 				satInMin.setText("00");
 				satOutHr.setText("0");
@@ -2055,11 +2033,8 @@ ItemListener {
 				satOutAMPMBox.setEnabled(true);
 				satTotHrs.setEnabled(true);
 			}
-			
+
 		}
-		
-		
-		
-		
+
 	}
 }
