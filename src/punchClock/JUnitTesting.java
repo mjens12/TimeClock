@@ -1,4 +1,4 @@
-package punchclock;
+package punchClock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

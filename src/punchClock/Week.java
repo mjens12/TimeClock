@@ -13,14 +13,15 @@ public class Week {
 	private double totHrsWorked = 0.0;
 
 	/**
-	 * Array that holds the in and out times for each day of the week, the AM/PM
+	 * Array that holds the in and out times for
+	 *  each day of the week, the AM/PM
 	 * settings of the time, and the total hours worked per day.
 	 */
 	private int[][] weekData = new int[7][6];
 
 	/**
-	 * Array that holds the time worked for each day. Used to find the sum of the
-	 * weekly total.
+	 * Array that holds the time worked for each day.
+	 *  Used to find the sum of the weekly total.
 	 */
 	private double[] timeWorked = new double[7];
 
@@ -51,7 +52,7 @@ public class Week {
 	 * @param unit
 	 *            Field location (in Hour, Out Min, AMPM, ect.)
 	 * @param dataValue
-	 *            int value that represents a unit of time or a value for AM/PM.
+	 *            int value that that's a unit of time or a value for AM/PM.
 	 */
 	public void setWeekData(final int day, final int unit,
 			final int dataValue) {
@@ -96,23 +97,12 @@ public class Week {
 	}
 
 	/**
-	 * Method that resets the weekData array. Sets each In/Out time for every week
-	 * day to 12:00AM.
-	 */
-	public void resetWeek() {
-
-		for (int i = 0; i < 7; i++) {
-			for (int j = 0; j < 6; j++) {
-				weekData[i][j] = 0;
-			}
-		}
-	}
-
-	/**
-	 * the calcTime method takes in the "clock-in" time, and the "clock-out" time in
-	 * hour, minute, and AM/PM sections. The method takes the difference between the
-	 * two times to calculate the total time worked for the day. How the difference
-	 * is calculated is based on the AM/PM of each time to make sure the calculated
+	 * The calcTime method takes in the "clock-in" time,
+	 * and the "clock-out" time in hour, minute, and AM/PM sections.
+	 * The method takes the difference between the two times to
+	 * calculate the total time worked for the day.
+	 * How the difference is calculated is based on the
+	 *  AM/PM of each time to make sure the calculated
 	 * time difference is within the typical 24-hour day time schedule.
 	 * 
 	 * @param time1H
@@ -141,7 +131,8 @@ public class Week {
 
 		// Error checking for invalid inputs.
 		if (time1Hour < 1 || time1Hour > 12 || time1M < 0
-				|| time1M > 59 || time2Hour < 1 || time2Hour > 12
+				|| time1M > 59 || time2Hour < 1 
+				|| time2Hour > 12
 				|| time2M < 0 || time2M > 59) {
 			return 0.00;
 		} else { // continue
@@ -150,7 +141,8 @@ public class Week {
 			if (time1AMPM == 0) {
 				// if input hour is 12 AM
 				if (time1Hour == 12) {
-					time1Hour = 0; // set to 0 for 24 hour scale.
+					 // set to 0 for 24 hour scale.
+					time1Hour = 0;
 				}
 				// input time is in PM
 			} else {
@@ -164,7 +156,8 @@ public class Week {
 			if (time2AMPM == 0) {
 				// if output hour is 12 AM
 				if (time2Hour == 12) {
-					time2Hour = 0; // set to 0 for 24 hour scale.
+					// set to 0 for 24 hour scale.
+					time2Hour = 0; 
 				}
 				// output time is in PM
 			} else {
@@ -185,7 +178,8 @@ public class Week {
 				// checking if out-time is greater
 				// than in-time
 				if (time1 > time2) {
-					difference = 24.0 - Math.abs(time2 - time1);
+					difference = 24.0 
+						- Math.abs(time2 - time1);
 				} else {
 					difference = Math.abs(time1 - time2);
 				}
@@ -197,7 +191,8 @@ public class Week {
 				// checking if out-time is greater
 				// than in-time
 				if (time1 > time2) {
-					difference = 24.0 - Math.abs(time2 - time1);
+					difference = 24.0 
+						- Math.abs(time2 - time1);
 				} else {
 					difference = Math.abs(time1 - time2);
 				}
